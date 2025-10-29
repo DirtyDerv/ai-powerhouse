@@ -58,3 +58,4 @@ python cli.py --claude "Write a poem about AI"
 python cli.py --gemini "Explain neural networks"
 python cli.py --openai "Generate JavaScript code"
 ```
+# ai-powerhouse
