@@ -1,0 +1,111 @@
+{
+    "// AI Powerhouse Global VS Code Configuration": "Automatically enables AI assistance across all projects",
+    
+    "// Global AI Powerhouse Keybindings": "Ctrl+Alt+A prefix for all AI operations",
+    "extensions.supportUntrustedWorkspaces": {
+        "ms-vscode.powershell": {
+            "supported": true,
+            "version": "2022.5.1"
+        }
+    },
+    
+    "// PowerShell Configuration for AI Agents": "",
+    "powershell.codeFormatting.preset": "OTBS",
+    "powershell.integratedConsole.showOnStartup": false,
+    "powershell.scriptAnalysis.enable": true,
+    
+    "// Python Configuration for AI Powerhouse": "",
+    "python.defaultInterpreterPath": "./ai_integration/.venv/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    
+    "// File Associations for AI Integration": "",
+    "files.associations": {
+        "*-agent.txt": "markdown",
+        "setup_ai.py": "python",
+        ".env.example": "plaintext"
+    },
+    
+    "// Tasks Configuration": "",
+    "tasks.version": "2.0.0",
+    
+    "// Terminal Configuration": "",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell",
+            "args": [
+                "-NoLogo",
+                "-ExecutionPolicy", "Bypass",
+                "-Command", "if (Test-Path $PROFILE) { . $PROFILE }"
+            ]
+        }
+    },
+    
+    "// AI Powerhouse Snippets": "",
+    "editor.snippetSuggestions": "top",
+    "editor.suggest.insertMode": "replace",
+    
+    "// AI Development Workflow": "",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+    
+    "// AI Powerhouse File Explorer": "",
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "setup_ai.py": ".env.example",
+        "*.py": "${capture}.pyc",
+        "README.md": "*.md"
+    },
+    
+    "// AI Integration Status Bar": "",
+    "workbench.statusBar.visible": true,
+    
+    "// Auto-suggest AI commands in terminal": "",
+    "terminal.integrated.commandsToSkipShell": [
+        "ai-help",
+        "security-review",
+        "generate-tests", 
+        "code-review",
+        "analyze-performance",
+        "database-optimize",
+        "research-topic",
+        "n8n-workflow"
+    ],
+    
+    "// AI Powerhouse Workspace Trust": "",
+    "security.workspace.trust.untrustedFiles": "open",
+    "security.workspace.trust.banner": "never",
+    
+    "// Search Configuration for AI Files": "",
+    "search.exclude": {
+        "**/ai_integration/cache/**": true,
+        "**/ai_integration/logs/**": true,
+        "**/ai_integration/temp/**": true,
+        "**/.venv/**": true
+    },
+    
+    "// Git Configuration for AI Projects": "",
+    "git.ignoreLimitWarning": true,
+    "git.defaultCloneDirectory": "",
+    
+    "// AI Development Extensions (Recommended)": "",
+    "extensions.recommendations": [
+        "ms-python.python",
+        "ms-vscode.powershell", 
+        "ms-vscode.vscode-json",
+        "ms-toolsai.jupyter",
+        "github.copilot",
+        "github.copilot-chat"
+    ],
+    
+    "// AI Powerhouse Custom Commands": "",
+    "terminal.integrated.env.windows": {
+        "AI_POWERHOUSE_PATH": "c:\\Users\\woody\\OneDrive\\Documents\\ai powerhouse",
+        "AI_AGENTS_ENABLED": "true"
+    }
+}
