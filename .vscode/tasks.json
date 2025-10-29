@@ -1,0 +1,29 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run AI Powerhouse",
+			"type": "shell",
+			"command": "& \"${workspaceFolder}/.venv/Scripts/python.exe\" main.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Setup Environment",
+			"type": "shell",
+			"command": "& \"${workspaceFolder}/.venv/Scripts/python.exe\" setup.py",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Run CLI",
+			"type": "shell",
+			"command": "& \"${workspaceFolder}/.venv/Scripts/python.exe\" cli.py status",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

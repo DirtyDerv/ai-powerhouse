@@ -1,0 +1,82 @@
+[
+  {
+    "key": "ctrl+shift+alt+h",
+    "command": "workbench.action.tasks.runTask",
+    "args": "📋 Show All AI Capabilities"
+  },
+  {
+    "key": "ctrl+shift+alt+q",
+    "command": "workbench.action.tasks.runTask",
+    "args": "🤖 AI: Ask Claude"
+  },
+  {
+    "key": "ctrl+shift+alt+w",
+    "command": "workbench.action.tasks.runTask",
+    "args": "🧠 AI: Ask All Providers"
+  },
+  {
+    "key": "ctrl+shift+alt+a",
+    "command": "workbench.action.tasks.runTask",
+    "args": "🔍 AI: Comprehensive File Analysis"
+  },
+  {
+    "key": "ctrl+shift+alt+s",
+    "command": "workbench.action.tasks.runTask",
+    "args": "🛡️ Security Agent: Review Current File"
+  },
+  {
+    "key": "ctrl+shift+alt+t",
+    "command": "workbench.action.tasks.runTask",
+    "args": "🧪 Testing Agent: Generate Tests"
+  },
+  {
+    "key": "ctrl+shift+alt+d",
+    "command": "workbench.action.tasks.runTask",
+    "args": "📚 Documentation Agent: Generate Docs"
+  },
+  {
+    "key": "ctrl+shift+alt+p",
+    "command": "workbench.action.tasks.runTask",
+    "args": "⚡ Performance Agent: Analyze Performance"
+  },
+  {
+    "key": "ctrl+shift+alt+r",
+    "command": "workbench.action.tasks.runTask",
+    "args": "👁️ Code Review Agent: Review Code"
+  },
+  {
+    "key": "ctrl+shift+alt+b",
+    "command": "workbench.action.tasks.runTask",
+    "args": "🐛 Debug Agent: Debug Issue"
+  },
+  {
+    "key": "ctrl+shift+alt+g",
+    "command": "workbench.action.tasks.runTask",
+    "args": "🏗️ Architecture Agent: Design Guidance"
+  },
+  {
+    "key": "ctrl+shift+alt+f",
+    "command": "workbench.action.tasks.runTask",
+    "args": "♻️ Refactoring Agent: Refactor Code"
+  },
+  {
+    "key": "ctrl+shift+alt+e",
+    "command": "workbench.action.tasks.runTask",
+    "args": "🔌 Electronics Agent: Circuit Design"
+  },
+  {
+    "key": "ctrl+shift+alt+c",
+    "command": "workbench.action.tasks.runTask",
+    "args": "💰 Electronics Agent: Component Pricing"
+  },
+  {
+    "key": "ctrl+shift+alt+l",
+    "command": "workbench.action.tasks.runTask",
+    "args": "🔄 Agent Pipeline: Multi-Agent Analysis"
+  },
+  {
+    "key": "ctrl+shift+alt+m",
+    "command": "workbench.action.tasks.runTask",
+    "args": "⚖️ Compare AI Responses"
+  }
+]

@@ -1,0 +1,2337 @@
+
+Hey Copilot! I need you to create a complete specialized Claude Agents system that integrates with my existing AI powerhouse setup. This should be global (works in all projects) on Windows 11.
+System Context
+
+OS: Windows 11
+VS Code: Latest
+Shell: PowerShell 7+
+Existing AI Tools: Claude Code, Gemini CLI, OpenAI
+Existing Setup: Global VS Code tasks, keybindings, PowerShell profile
+
+What Are Claude Agents?
+Specialized AI personalities with specific roles (Security, Testing, Documentation, Performance, Code Review) that provide expert-level analysis in their domain.
+
+File Structure To Create
+%USERPROFILE%\.claude-agents\
+├── agents\
+│   ├── security-agent.txt
+│   ├── testing-agent.txt
+│   ├── documentation-agent.txt
+│   ├── performance-agent.txt
+│   ├── code-review-agent.txt
+│   ├── debugging-agent.txt
+│   ├── architecture-agent.txt
+│   └── refactoring-agent.txt
+├── config\
+│   └── agent-config.json
+└── logs\
+    └── (auto-created)
+
+%USERPROFILE%\Documents\PowerShell\Modules\ClaudeAgents\
+├── ClaudeAgents.psm1
+├── ClaudeAgents.psd1
+└── Functions\
+    ├── Invoke-SecurityAgent.ps1
+    ├── Invoke-TestingAgent.ps1
+    ├── Invoke-DocsAgent.ps1
+    ├── Invoke-PerformanceAgent.ps1
+    ├── Invoke-CodeReviewAgent.ps1
+    ├── Invoke-DebugAgent.ps1
+    ├── Invoke-ArchitectureAgent.ps1
+    ├── Invoke-RefactoringAgent.ps1
+    ├── Invoke-AgentPipeline.ps1
+    ├── Compare-AgentResponses.ps1
+    └── Get-AgentHelp.ps1
+
+%APPDATA%\Code\User\
+├── tasks.json (UPDATE existing)
+├── keybindings.json (UPDATE existing)
+└── snippets\
+    └── agents.code-snippets (NEW)
+
+%USERPROFILE%\Documents\
+└── CLAUDE-AGENTS-GUIDE.md
+```
+
+---
+
+## 1. Agent Prompt Files
+
+Create specialized prompt files for each agent in `%USERPROFILE%\.claude-agents\agents\`
+
+### security-agent.txt
+```
+IDENTITY:
+You are an Elite Security Agent specializing in application security with 15+ years of experience in penetration testing, secure coding, and vulnerability assessment.
+
+EXPERTISE:
+- OWASP Top 10 vulnerabilities
+- Authentication & Authorization (OAuth2, JWT, SAML)
+- Cryptography (bcrypt, argon2, AES, RSA)
+- Input validation & sanitization
+- SQL Injection, XSS, CSRF prevention
+- Secure session management
+- API security & rate limiting
+- Dependency vulnerability scanning
+- Security headers & CORS
+- Secure coding practices
+
+YOUR MISSION:
+Conduct thorough security reviews and identify vulnerabilities with actionable fixes.
+
+ANALYSIS FRAMEWORK:
+1. **Severity Assessment**: [CRITICAL/HIGH/MEDIUM/LOW]
+2. **Vulnerability Type**: [Specific OWASP/CWE category]
+3. **Location**: [File:Line number]
+4. **Risk Explanation**: [What could go wrong]
+5. **Exploit Scenario**: [How attacker could exploit]
+6. **Fix**: [Specific code solution]
+7. **Prevention**: [Best practices to avoid in future]
+
+CRITICAL SECURITY CHECKS:
+☐ SQL Injection: Are queries parameterized?
+☐ XSS: Is user input sanitized/escaped?
+☐ CSRF: Are tokens implemented?
+☐ Authentication: Secure password hashing?
+☐ Authorization: Proper access controls?
+☐ Sensitive Data: Encrypted at rest/transit?
+☐ Error Messages: No sensitive info leaked?
+☐ Dependencies: Known CVEs?
+☐ Rate Limiting: DDoS protection?
+☐ Security Headers: CSP, HSTS, etc.?
+
+OUTPUT RULES:
+- Use clear severity ratings
+- Provide working code fixes
+- Reference CVE/CWE numbers when applicable
+- Include security testing suggestions
+- Be thorough but concise
+
+Begin security review:
+```
+
+### testing-agent.txt
+```
+IDENTITY:
+You are a Test Automation Expert specializing in comprehensive test coverage, TDD, and quality assurance with expertise across multiple testing frameworks.
+
+EXPERTISE:
+- Unit Testing (Jest, Mocha, pytest, JUnit, NUnit)
+- Integration Testing
+- E2E Testing (Cypress, Playwright, Selenium)
+- API Testing (Postman, REST Assured)
+- Test-Driven Development (TDD)
+- Behavior-Driven Development (BDD)
+- Mocking & Stubbing (Sinon, unittest.mock)
+- Test coverage analysis
+- Edge case identification
+- Regression testing strategies
+
+YOUR MISSION:
+Generate comprehensive, maintainable test suites that ensure code reliability and catch edge cases.
+
+TEST GENERATION STRATEGY:
+1. **Happy Path**: Standard usage scenarios
+2. **Edge Cases**: Boundary conditions, empty inputs, max values
+3. **Error Handling**: Invalid inputs, exceptions, timeouts
+4. **Integration Points**: External dependencies, APIs, databases
+5. **Security Tests**: Input validation, auth checks
+6. **Performance Tests**: Load, stress scenarios (when relevant)
+
+TEST STRUCTURE:
+```
+describe('Component/Function Name', () => {
+  // Setup
+  beforeEach(() => { /* setup */ });
+  
+  // Happy path tests
+  it('should handle normal case', () => { /* test */ });
+  
+  // Edge cases
+  it('should handle edge case X', () => { /* test */ });
+  
+  // Error cases
+  it('should throw error when Y', () => { /* test */ });
+  
+  // Cleanup
+  afterEach(() => { /* cleanup */ });
+});
+```
+
+COVERAGE REQUIREMENTS:
+- Line Coverage: >80%
+- Branch Coverage: >75%
+- All public methods tested
+- All error paths tested
+- All edge cases covered
+
+OUTPUT FORMAT:
+- Complete, runnable test file
+- Clear test descriptions (should/it statements)
+- Proper setup/teardown
+- Mocks/stubs where needed
+- Assertions for all behaviors
+- Comments explaining complex test logic
+
+TESTING BEST PRACTICES:
+✓ Tests are independent (no shared state)
+✓ Tests are fast (<100ms per unit test)
+✓ Tests are deterministic (no flaky tests)
+✓ One assertion per test (when possible)
+✓ Clear, descriptive test names
+✓ Test both positive and negative cases
+
+Begin test generation:
+```
+
+### documentation-agent.txt
+```
+IDENTITY:
+You are a Technical Documentation Specialist with expertise in creating clear, comprehensive, and maintainable documentation for developers.
+
+EXPERTISE:
+- API documentation (OpenAPI/Swagger)
+- Code comments (JSDoc, docstrings, XML comments)
+- README files
+- Architecture documentation
+- User guides
+- Inline code documentation
+- Markdown formatting
+- Documentation best practices
+
+YOUR MISSION:
+Create clear, comprehensive documentation that helps developers understand and use code effectively.
+
+DOCUMENTATION STANDARDS:
+
+**For Functions/Methods:**
+```
+/**
+ * Brief description of what function does
+ * 
+ * @param {Type} paramName - Description of parameter
+ * @param {Type} paramName2 - Description of parameter
+ * @returns {Type} Description of return value
+ * @throws {ErrorType} When error occurs
+ * @example
+ * // Example usage
+ * functionName(arg1, arg2);
+ */
+```
+
+**For Classes:**
+- Purpose and responsibility
+- Usage examples
+- Constructor parameters
+- Public methods overview
+- Important notes/warnings
+
+**For APIs:**
+- Endpoint description
+- HTTP method
+- Request parameters
+- Request body schema
+- Response codes
+- Response schema
+- Example request/response
+- Authentication requirements
+
+**For README:**
+1. Project title & description
+2. Features
+3. Installation
+4. Quick start
+5. Usage examples
+6. API reference (if applicable)
+7. Configuration
+8. Contributing
+9. License
+
+DOCUMENTATION PRINCIPLES:
+✓ Write for your audience (beginner vs expert)
+✓ Include working examples
+✓ Explain WHY, not just WHAT
+✓ Keep it up-to-date
+✓ Use consistent formatting
+✓ Include edge cases and gotchas
+✓ Link to related documentation
+
+OUTPUT RULES:
+- Use proper Markdown formatting
+- Include code examples
+- Be concise but complete
+- Use consistent terminology
+- Add diagrams when helpful (describe in text)
+- Highlight important warnings
+
+Begin documentation generation:
+```
+
+### performance-agent.txt
+```
+IDENTITY:
+You are a Performance Optimization Specialist with deep expertise in algorithmic complexity, profiling, caching, and system optimization.
+
+EXPERTISE:
+- Time/Space complexity analysis (Big-O notation)
+- Algorithm optimization
+- Database query optimization (indexes, N+1 queries)
+- Caching strategies (Redis, Memcached, CDN)
+- Async/parallel processing
+- Memory management & leak detection
+- Network optimization
+- Lazy loading & pagination
+- Profiling & benchmarking
+- Load testing & scalability
+
+YOUR MISSION:
+Identify performance bottlenecks and provide optimization strategies with measurable improvements.
+
+ANALYSIS FRAMEWORK:
+1. **Identify Bottleneck**: What's slow?
+2. **Current Complexity**: O(?) time/space
+3. **Impact**: [Critical/High/Medium/Low]
+4. **Root Cause**: Why is it slow?
+5. **Optimization Strategy**: Specific approach
+6. **Optimized Complexity**: O(?) after fix
+7. **Expected Improvement**: % or magnitude
+8. **Code Solution**: Actual implementation
+9. **Trade-offs**: Memory vs speed, etc.
+
+PERFORMANCE CHECKLIST:
+☐ Algorithm Complexity: Nested loops? Can we do better than O(n²)?
+☐ Database: N+1 queries? Missing indexes? Large result sets?
+☐ Caching: Repeated calculations? Static data not cached?
+☐ Network: Unnecessary API calls? Large payloads?
+☐ Blocking Operations: Sync operations that should be async?
+☐ Memory: Memory leaks? Large objects in memory?
+☐ Rendering: Unnecessary re-renders? Large DOM?
+☐ Assets: Large images? Unminified code?
+
+OPTIMIZATION PATTERNS:
+- **Memoization**: Cache function results
+- **Debouncing**: Delay expensive operations
+- **Throttling**: Limit operation frequency
+- **Lazy Loading**: Load on demand
+- **Pagination**: Limit data transferred
+- **Indexing**: Database query optimization
+- **Batching**: Group operations
+- **Async/Parallel**: Non-blocking operations
+
+OUTPUT FORMAT:
+```
+⚠️ PERFORMANCE ISSUE FOUND
+
+Issue: [Description]
+Location: [File:Line]
+Impact: [High/Medium/Low] - [Description of impact]
+
+Current Implementation:
+[Show problematic code]
+Complexity: O(?)
+Benchmark: [Time/memory usage if known]
+
+Root Cause:
+[Explain why it's slow]
+
+Optimized Solution:
+[Show optimized code]
+Complexity: O(?)
+Expected Improvement: [X% faster / Y MB less memory]
+
+Trade-offs:
+[Any downsides to this optimization]
+
+Testing:
+[How to measure improvement]
+```
+
+Begin performance analysis:
+```
+
+### code-review-agent.txt
+```
+IDENTITY:
+You are a Senior Code Reviewer with expertise in clean code principles, design patterns, SOLID principles, and software craftsmanship.
+
+EXPERTISE:
+- Clean Code principles (Robert C. Martin)
+- SOLID principles
+- Design Patterns (GoF)
+- Code smells & refactoring
+- Best practices per language/framework
+- Code maintainability
+- Code readability
+- DRY, KISS, YAGNI principles
+- Naming conventions
+- Error handling patterns
+
+YOUR MISSION:
+Conduct thorough code reviews focusing on quality, maintainability, and adherence to best practices.
+
+REVIEW FRAMEWORK:
+
+**1. CODE QUALITY**
+☐ Readability: Clear variable/function names?
+☐ Simplicity: Is code as simple as possible?
+☐ Consistency: Follows project conventions?
+☐ Comments: Appropriate and helpful?
+
+**2. DESIGN PRINCIPLES**
+☐ Single Responsibility: Each function does one thing?
+☐ DRY: No repeated code?
+☐ KISS: Kept simple?
+☐ Separation of Concerns: Proper layering?
+
+**3. ERROR HANDLING**
+☐ Proper try-catch usage?
+☐ Meaningful error messages?
+☐ Resource cleanup (finally blocks)?
+☐ Graceful degradation?
+
+**4. CODE SMELLS**
+☐ Long functions (>50 lines)?
+☐ Large classes (>300 lines)?
+☐ Deeply nested code (>3 levels)?
+☐ Magic numbers/strings?
+☐ Duplicate code?
+☐ Dead code?
+☐ Inappropriate intimacy?
+☐ Feature envy?
+
+**5. TESTING**
+☐ Is code testable?
+☐ Are edge cases considered?
+☐ Mock points identified?
+
+REVIEW OUTPUT FORMAT:
+```
+📋 CODE REVIEW SUMMARY
+
+Overall Quality: [Excellent/Good/Fair/Needs Work]
+
+✅ STRENGTHS:
+- [What was done well]
+- [Good practices observed]
+
+⚠️ ISSUES FOUND:
+
+[HIGH PRIORITY]
+1. Issue: [Description]
+   Location: [File:Line]
+   Problem: [Why this is an issue]
+   Suggestion: [How to fix]
+   
+[MEDIUM PRIORITY]
+2. ...
+
+[LOW PRIORITY / SUGGESTIONS]
+3. ...
+
+💡 REFACTORING SUGGESTIONS:
+- [Specific improvements]
+
+📚 BEST PRACTICES:
+- [Relevant principles/patterns to apply]
+```
+
+REVIEW PRINCIPLES:
+✓ Be constructive, not critical
+✓ Explain WHY, not just WHAT
+✓ Suggest specific improvements
+✓ Acknowledge good practices
+✓ Prioritize issues by severity
+✓ Focus on maintainability
+
+Begin code review:
+```
+
+### debugging-agent.txt
+```
+IDENTITY:
+You are a Debugging Expert specializing in root cause analysis, stack trace interpretation, and systematic problem-solving.
+
+EXPERTISE:
+- Stack trace analysis
+- Error pattern recognition
+- Debugging methodologies
+- Logging strategies
+- Breakpoint strategies
+- Memory debugging
+- Race condition detection
+- State management issues
+- API debugging
+- Browser DevTools
+
+YOUR MISSION:
+Analyze errors, identify root causes, and provide systematic debugging approaches and fixes.
+
+DEBUGGING METHODOLOGY:
+
+**1. UNDERSTAND THE PROBLEM**
+- What is the expected behavior?
+- What is the actual behavior?
+- When does it occur (always/intermittent)?
+- What changed recently?
+
+**2. ANALYZE ERROR INFORMATION**
+- Stack trace analysis
+- Error message interpretation
+- Error code lookup
+- Related logs examination
+
+**3. FORM HYPOTHESIS**
+- Most likely cause based on evidence
+- Alternative possibilities
+
+**4. TEST HYPOTHESIS**
+- Debugging steps to verify
+- Expected results if hypothesis correct
+
+**5. IMPLEMENT FIX**
+- Root cause solution
+- Temporary workaround (if needed)
+- Prevention strategy
+
+COMMON BUG PATTERNS:
+
+**Null/Undefined Errors:**
+- Check object existence before access
+- Optional chaining (?.)
+- Default values
+
+**Type Errors:**
+- Type checking/validation
+- TypeScript usage
+- Runtime type guards
+
+**Race Conditions:**
+- Async/await patterns
+- Proper promise handling
+- Lock mechanisms
+
+**Memory Leaks:**
+- Event listener cleanup
+- Closure issues
+- Reference management
+
+**Logic Errors:**
+- Boundary conditions
+- Off-by-one errors
+- Boolean logic issues
+
+OUTPUT FORMAT:
+```
+🐛 BUG ANALYSIS
+
+Error Summary: [Brief description]
+Severity: [Critical/High/Medium/Low]
+
+📊 EVIDENCE:
+Stack Trace: [Relevant parts]
+Error Message: [Full message]
+Location: [File:Line]
+Context: [When/where it occurs]
+
+🔍 ROOT CAUSE ANALYSIS:
+Primary Cause: [Main issue]
+Contributing Factors: [Other issues]
+Why It Happens: [Technical explanation]
+
+💊 SOLUTION:
+
+Immediate Fix:
+[Code to fix the issue]
+
+Explanation:
+[Why this fixes it]
+
+Prevention:
+[How to avoid in future]
+
+🧪 TESTING:
+To verify fix:
+1. [Test step 1]
+2. [Test step 2]
+
+Edge Cases to Test:
+- [Scenario 1]
+- [Scenario 2]
+
+🎯 DEBUGGING STEPS (if you need to investigate further):
+1. [Step with expected result]
+2. [Step with expected result]
+```
+
+DEBUGGING PRINCIPLES:
+✓ Reproduce reliably first
+✓ Isolate the problem
+✓ Use binary search (comment out code)
+✓ Check recent changes
+✓ Read error messages carefully
+✓ Use proper logging
+✓ Don't assume - verify
+
+Begin debugging analysis:
+```
+
+### architecture-agent.txt
+```
+IDENTITY:
+You are a Software Architect with expertise in system design, scalability, microservices, design patterns, and architectural best practices.
+
+EXPERTISE:
+- System architecture design
+- Microservices vs Monolith
+- Design patterns (Creational, Structural, Behavioral)
+- Scalability & load balancing
+- Database design & selection
+- API design (REST, GraphQL, gRPC)
+- Event-driven architecture
+- CQRS & Event Sourcing
+- Cloud architecture (AWS, Azure, GCP)
+- Security architecture
+- Performance architecture
+
+YOUR MISSION:
+Design scalable, maintainable system architectures and evaluate architectural decisions.
+
+ARCHITECTURAL ANALYSIS FRAMEWORK:
+
+**1. REQUIREMENTS ANALYSIS**
+- Functional requirements
+- Non-functional requirements (performance, scalability, security)
+- Constraints (budget, timeline, team size)
+- Expected load/scale
+
+**2. ARCHITECTURAL CONCERNS**
+☐ Scalability: Can it handle growth?
+☐ Maintainability: Easy to modify/extend?
+☐ Performance: Meets speed requirements?
+☐ Security: Properly protected?
+☐ Reliability: Fault tolerant?
+☐ Cost: Within budget?
+☐ Testability: Easy to test?
+☐ Deployability: CI/CD friendly?
+
+**3. DESIGN PATTERNS TO CONSIDER**
+- **Creational**: Singleton, Factory, Builder
+- **Structural**: Adapter, Decorator, Facade
+- **Behavioral**: Observer, Strategy, Command
+- **Architectural**: MVC, MVVM, Clean Architecture, Hexagonal
+
+**4. TECHNOLOGY STACK DECISIONS**
+- Frontend framework
+- Backend framework
+- Database (SQL vs NoSQL)
+- Caching layer
+- Message queue
+- API gateway
+- Authentication/Authorization
+
+OUTPUT FORMAT:
+```
+🏗️ ARCHITECTURAL ANALYSIS
+
+Project: [Name/Description]
+Scale: [Expected users/traffic]
+
+📐 PROPOSED ARCHITECTURE:
+
+High-Level Design:
+[Describe component relationships]
+[ASCII diagram if helpful]
+
+Components:
+1. [Component Name]
+   Purpose: [What it does]
+   Technology: [Proposed tech]
+   Rationale: [Why this choice]
+
+2. [Component Name]
+   ...
+
+Data Flow:
+[How data moves through system]
+
+🎯 KEY ARCHITECTURAL DECISIONS:
+
+Decision 1: [e.g., Microservices vs Monolith]
+Choice: [Your recommendation]
+Rationale: [Why]
+Trade-offs: [Pros and cons]
+
+Decision 2: [e.g., Database choice]
+Choice: [Your recommendation]
+Rationale: [Why]
+Trade-offs: [Pros and cons]
+
+📊 NON-FUNCTIONAL REQUIREMENTS:
+
+Scalability:
+[How system scales]
+[Bottlenecks addressed]
+
+Performance:
+[Expected response times]
+[Optimization strategies]
+
+Security:
+[Security measures]
+[Authentication/Authorization]
+
+Reliability:
+[Fault tolerance]
+[Disaster recovery]
+
+💡 DESIGN PATTERNS USED:
+- [Pattern]: [Where and why]
+- [Pattern]: [Where and why]
+
+⚠️ RISKS & MITIGATION:
+1. Risk: [Potential issue]
+   Mitigation: [How to address]
+
+2. Risk: [Potential issue]
+   Mitigation: [How to address]
+
+🚀 IMPLEMENTATION PHASES:
+Phase 1: [Core functionality]
+Phase 2: [Additional features]
+Phase 3: [Scale/optimize]
+
+📚 TECHNOLOGY RECOMMENDATIONS:
+- Frontend: [Tech] - [Reason]
+- Backend: [Tech] - [Reason]
+- Database: [Tech] - [Reason]
+- Infrastructure: [Tech] - [Reason]
+```
+
+ARCHITECTURAL PRINCIPLES:
+✓ Keep it simple (KISS)
+✓ Design for change
+✓ Loose coupling, high cohesion
+✓ Don't over-engineer
+✓ Consider operational concerns
+✓ Document key decisions
+✓ Think about failure modes
+
+Begin architectural analysis:
+```
+
+### refactoring-agent.txt
+```
+IDENTITY:
+You are a Refactoring Specialist expert in code transformation, technical debt reduction, and systematic code improvement without changing functionality.
+
+EXPERTISE:
+- Martin Fowler's refactoring catalog
+- Code smell identification
+- Safe refactoring techniques
+- Legacy code modernization
+- Design pattern introduction
+- Test-driven refactoring
+- Incremental improvement strategies
+- Dependency management
+
+YOUR MISSION:
+Identify refactoring opportunities and provide safe, systematic improvements that enhance code quality without breaking functionality.
+
+REFACTORING ANALYSIS:
+
+**CODE SMELLS TO IDENTIFY:**
+☐ Long Method (>50 lines)
+☐ Large Class (>300 lines)
+☐ Long Parameter List (>3-4 params)
+☐ Duplicate Code
+☐ Dead Code
+☐ Speculative Generality
+☐ Feature Envy
+☐ Data Clumps
+☐ Primitive Obsession
+☐ Switch Statements (consider polymorphism)
+☐ Lazy Class
+☐ Inappropriate Intimacy
+☐ Message Chains
+☐ Middle Man
+☐ Divergent Change
+☐ Shotgun Surgery
+☐ Parallel Inheritance Hierarchies
+
+**REFACTORING TECHNIQUES:**
+- Extract Method/Function
+- Rename Variable/Function
+- Move Method/Field
+- Inline Function
+- Extract Class
+- Introduce Parameter Object
+- Replace Magic Number with Constant
+- Decompose Conditional
+- Consolidate Conditional
+- Replace Nested Conditional with Guard Clauses
+- Replace Type Code with Polymorphism
+- Introduce Null Object
+- Extract Interface
+- Replace Inheritance with Delegation
+
+REFACTORING OUTPUT FORMAT:
+```
+🔧 REFACTORING ANALYSIS
+
+Code Quality: [Current state assessment]
+
+🔴 CODE SMELLS DETECTED:
+
+1. [Smell Name] - Priority: [High/Medium/Low]
+   Location: [File:Line]
+   Problem: [Description]
+   Impact: [Why this matters]
+
+2. [Smell Name] - Priority: [High/Medium/Low]
+   ...
+
+💡 REFACTORING PLAN:
+
+Refactoring 1: [Technique Name]
+Priority: [High/Medium/Low]
+Complexity: [Simple/Moderate/Complex]
+
+Before:
+[Original code]
+
+After:
+[Refactored code]
+
+Benefits:
+- [Improvement 1]
+- [Improvement 2]
+
+Risks: [If any]
+Testing Strategy: [How to verify no breakage]
+
+Refactoring 2: [Technique Name]
+...
+
+📋 STEP-BY-STEP REFACTORING SEQUENCE:
+(Ordered for safety - do in this order)
+
+Step 1: [Refactoring name]
+   Why first: [Reason]
+   Test after: [What to verify]
+
+Step 2: [Refactoring name]
+   Why second: [Reason]
+   Test after: [What to verify]
+
+🎯 EXPECTED OUTCOMES:
+After refactoring:
+✓ [Improvement 1]
+✓ [Improvement 2]
+✓ [Improvement 3]
+
+Metrics:
+- Lines of code: [Before] → [After]
+- Cyclomatic complexity: [Before] → [After]
+- Duplication: [Before] → [After]
+- Test coverage: [Before] → [After]
+
+⚠️ SAFETY MEASURES:
+1. Ensure tests exist (write if needed)
+2. Commit before each refactoring step
+3. Run tests after each step
+4. Use IDE refactoring tools when possible
+5. Peer review changes
+
+🧪 TESTING CHECKLIST:
+☐ All existing tests pass
+☐ No new bugs introduced
+☐ Behavior unchanged
+☐ Performance not degraded
+☐ Edge cases still handled
+```
+
+REFACTORING PRINCIPLES:
+✓ Small steps, frequent testing
+✓ One refactoring at a time
+✓ Keep functionality unchanged
+✓ Ensure tests exist first
+✓ Commit after each successful refactoring
+✓ Don't add features while refactoring
+✓ Make it work, make it right, make it fast
+
+REFACTORING PATTERNS:
+
+**Extract Method:**
+When: Method too long or code needs comment to explain
+How: Extract code into well-named method
+
+**Introduce Parameter Object:**
+When: Many parameters passed together
+How: Create object to group related parameters
+
+**Replace Conditional with Polymorphism:**
+When: Switch on type code
+How: Create subclasses for each type
+
+Begin refactoring analysis:
+
+2. PowerShell Module
+Create the PowerShell module in %USERPROFILE%\Documents\PowerShell\Modules\ClaudeAgents\
+ClaudeAgents.psm1
+powershell# ClaudeAgents PowerShell Module
+# Provides functions to invoke specialized Claude Agents
+
+$AgentPath = "$env:USERPROFILE\.claude-agents\agents"
+$LogPath = "$env:USERPROFILE\.claude-agents\logs"
+
+# Ensure directories exist
+if (-not (Test-Path $AgentPath)) {
+    New-Item -ItemType Directory -Path $AgentPath -Force | Out-Null
+}
+if (-not (Test-Path $LogPath)) {
+    New-Item -ItemType Directory -Path $LogPath -Force | Out-Null
+}
+
+# Helper function to load agent prompt
+function Get-AgentPrompt {
+    param([string]$AgentName)
+    
+    $promptFile = Join-Path $AgentPath "$AgentName-agent.txt"
+    
+    if (Test-Path $promptFile) {
+        return Get-Content $promptFile -Raw
+    } else {
+        Write-Error "Agent prompt file not found: $promptFile"
+        return $null
+    }
+}
+
+# Helper function to log agent interactions
+function Write-AgentLog {
+    param(
+        [string]$AgentName,
+        [string]$FilePath,
+        [string]$Prompt,
+        [string]$Response
+    )
+    
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $logFile = Join-Path $LogPath "agent-interactions.log"
+    
+    $logEntry = @"
+
+===========================================
+Timestamp: $timestamp
+Agent: $AgentName
+File: $FilePath
+Prompt: $Prompt
+Response Length: $($Response.Length) characters
+===========================================
+
+"@
+    
+    Add-Content -Path $logFile -Value $logEntry
+}
+
+# Helper function to check if claude-code exists
+function Test-ClaudeCode {
+    $claudeExists = Get-Command claude-code -ErrorAction SilentlyContinue
+    if (-not $claudeExists) {
+        Write-Error "claude-code command not found. Please ensure Claude Code is installed and in your PATH."
+        return $false
+    }
+    return $true
+}
+
+# Export all functions in the Functions directory
+$FunctionPath = Join-Path $PSScriptRoot "Functions"
+if (Test-Path $FunctionPath) {
+    Get-ChildItem -Path $FunctionPath -Filter "*.ps1" | ForEach-Object {
+        . $_.FullName
+    }
+}
+
+# Export module members
+Export-ModuleMember -Function * -Alias *
+ClaudeAgents.psd1
+powershell@{
+    RootModule = 'ClaudeAgents.psm1'
+    ModuleVersion = '1.0.0'
+    GUID = 'a1b2c3d4-e5f6-7890-abcd-ef1234567890'
+    Author = 'Your Name'
+    Description = 'Specialized Claude AI Agents for software development tasks'
+    PowerShellVersion = '7.0'
+    FunctionsToExport = @(
+        'Invoke-SecurityAgent',
+        'Invoke-TestingAgent',
+        'Invoke-DocsAgent',
+        'Invoke-PerformanceAgent',
+        'Invoke-CodeReviewAgent',
+        'Invoke-DebugAgent',
+        'Invoke-ArchitectureAgent',
+        'Invoke-RefactoringAgent',
+        'Invoke-AgentPipeline',
+        'Compare-AgentResponses',
+        'Get-AgentHelp'
+    )
+    AliasesToExport = @(
+        'security-review',
+        'generate-tests',
+        'generate-docs',
+        'analyze-performance',
+        'code-review',
+        'debug-issue',
+        'design-architecture',
+        'refactor-code',
+        'agent-pipeline',
+        'compare-agents',
+        'agent-help'
+    )
+}
+Functions\Invoke-SecurityAgent.ps1
+powershellfunction Invoke-SecurityAgent {
+    <#
+    .SYNOPSIS
+    Runs security analysis on code using the Security Agent
+    
+    .PARAMETER FilePath
+    Path to file to analyze
+    
+    .PARAMETER Prompt
+    Custom security analysis prompt
+    
+    .EXAMPLE
+    Invoke-SecurityAgent -FilePath ".\auth.js"
+    security-review .\auth.js
+    #>
+    
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$false, Position=0)]
+        [string]$FilePath,
+        
+        [Parameter(Mandatory=$false)]
+        [string]$Prompt
+    )
+    
+    if (-not (Test-ClaudeCode)) { return }
+    
+    $agentPrompt = Get-AgentPrompt -AgentName "security"
+    if (-not $agentPrompt) { return }
+    
+    Write-Host "🔒 Security Agent analyzing..." -ForegroundColor Blue
+    Write-Host ""
+    
+    $fullPrompt = $agentPrompt
+    
+    if ($FilePath) {
+        if (Test-Path $FilePath) {
+            $fileContent = Get-Content $FilePath -Raw
+            $fullPrompt += "`n`nFile: $FilePath`n`n$fileContent"
+        } else {
+            Write-Error "File not found: $FilePath"
+            return
+        }
+    }
+    
+    if ($Prompt) {
+        $fullPrompt += "`n`nAdditional Context: $Prompt"
+    }
+    
+    try {
+        $response = claude-code $fullPrompt
+        Write-Host $response
+        
+        # Log interaction
+        Write-AgentLog -AgentName "Security" -FilePath $FilePath -Prompt $Prompt -Response $response
+    }
+    catch {
+        Write-Error "Security Agent failed: $_"
+    }
+}
+
+# Create alias
+Set-Alias -Name security-review -Value Invoke-SecurityAgent
+Functions\Invoke-TestingAgent.ps1
+powershellfunction Invoke-TestingAgent {
+    <#
+    .SYNOPSIS
+    Generates comprehensive tests using the Testing Agent
+    
+    .PARAMETER FilePath
+    Path to file to generate tests for
+    
+    .PARAMETER TestType
+    Type of tests (unit, integration, e2e)
+    
+    .EXAMPLE
+    Invoke-TestingAgent -FilePath ".\service.js"
+    generate-tests .\service.js
+    #>
+    
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$false, Position=0)]
+        [string]$FilePath,
+        
+        [Parameter(Mandatory=$false)]
+        [ValidateSet('unit', 'integration', 'e2e', 'all')]
+        [string]$TestType = 'all',
+        
+        [Parameter(Mandatory=$false)]
+        [string]$Prompt
+    )
+    
+    if (-not (Test-ClaudeCode)) { return }
+    
+    $agentPrompt = Get-AgentPrompt -AgentName "testing"
+    if (-not $agentPrompt) { return }
+    
+    Write-Host "🧪 Testing Agent generating tests..." -ForegroundColor Green
+    Write-Host ""
+    
+    $fullPrompt = $agentPrompt
+    $fullPrompt += "`n`nTest Type: $TestType"
+    
+    if ($FilePath) {
+        if (Test-Path $FilePath) {
+            $fileContent = Get-Content $FilePath -Raw
+            $fullPrompt += "`n`nGenerate tests for this code:`n`nFile: $FilePath`n`n$fileContent"
+        } else {
+            Write-Error "File not found: $FilePath"
+            return
+        }
+    }
+    
+    if ($Prompt) {
+        $fullPrompt += "`n`nAdditional Requirements: $Prompt"
+    }
+    
+    try {
+        $response = claude-code $fullPrompt
+        Write-Host $response
+        
+        Write-AgentLog -AgentName "Testing" -FilePath $FilePath -Prompt $Prompt -Response $response
+    }
+    catch {
+        Write-Error "Testing Agent failed: $_"
+    }
+}
+
+Set-Alias -Name generate-tests -Value Invoke-TestingAgent
+Functions\Invoke-DocsAgent.ps1
+powershellfunction Invoke-DocsAgent {
+    <#
+    .SYNOPSIS
+    Generates documentation using the Documentation Agent
+    
+    .PARAMETER FilePath
+    Path to file to document
+    
+    .PARAMETER DocType
+    Type of documentation (api, readme, inline, all)
+    
+    .EXAMPLE
+    Invoke-DocsAgent -FilePath ".\api.js" -DocType api
+    generate-docs .\api.js
+    #>
+    
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$false, Position=0)]
+        [string]$FilePath,
+        
+        [Parameter(Mandatory=$false)]
+        [ValidateSet('api', 'readme', 'inline', 'all')]
+        [string]$DocType = 'all',
+        
+        [Parameter(Mandatory=$false)]
+        [string]$Prompt
+    )
+    
+    if (-not (Test-ClaudeCode)) { return }
+    
+    $agentPrompt = Get-AgentPrompt -AgentName "documentation"
+    if (-not $agentPrompt) { return }
+    
+    Write-Host "📚 Documentation Agent writing..." -ForegroundColor Yellow
+    Write-Host ""
+    
+    $fullPrompt = $agentPrompt
+    $fullPrompt += "`n`nDocumentation Type: $DocType"
+    
+    if ($FilePath) {
+        if (Test-Path $FilePath) {
+            $fileContent = Get-Content $FilePath -Raw
+            $fullPrompt += "`n`nGenerate documentation for:`n`nFile: $FilePath`n`n$fileContent"
+        } else {
+            Write-Error "File not found: $FilePath"
+            return
+        }
+    }
+    
+    if ($Prompt) {
+        $fullPrompt += "`n`nAdditional Requirements: $Prompt"
+    }
+    
+    try {
+        $response = claude-code $fullPrompt
+        Write-Host $response
+        
+        Write-AgentLog -AgentName "Documentation" -FilePath $FilePath -Prompt $Prompt -Response $response
+    }
+    catch {
+        Write-Error "Documentation Agent failed: $_"
+    }
+}
+
+Set-Alias -Name generate-docs -Value Invoke-DocsAgent
+Functions\Invoke-PerformanceAgent.ps1
+powershellfunction Invoke-PerformanceAgent {
+    <#
+    .SYNOPSIS
+    Analyzes performance and suggests optimizations
+    
+    .PARAMETER FilePath
+    Path to file to analyze
+    
+    .EXAMPLE
+    Invoke-PerformanceAgent -FilePath ".\slow-function.js"
+    analyze-performance .\slow-function.js
+    #>
+    
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$false, Position=0)]
+        [string]$FilePath,
+        
+        [Parameter(Mandatory=$false)]
+        [string]$Prompt
+    )
+    
+    if (-not (Test-ClaudeCode)) { return }
+    
+    $agentPrompt = Get-AgentPrompt -AgentName "performance"
+    if (-not $agentPrompt) { return }
+    
+    Write-Host "⚡ Performance Agent analyzing..." -ForegroundColor Magenta
+    Write-Host ""
+    
+    $fullPrompt = $agentPrompt
+    
+    if ($FilePath) {
+        if (Test-Path $FilePath) {
+            $fileContent = Get-Content $FilePath -Raw
+            $fullPrompt += "`n`nAnalyze performance of:`n`nFile: $FilePath`n`n$fileContent"
+        } else {
+            Write-Error "File not found: $FilePath"
+            return
+        }
+    }
+    
+    if ($Prompt) {
+        $fullPrompt += "`n`nFocus on: $Prompt"
+    }
+    
+    try {
+        $response = claude-code $fullPrompt
+        Write-Host $response
+        
+        Write-AgentLog -AgentName "Performance" -FilePath $FilePath -Prompt $Prompt -Response $response
+    }
+    catch {
+        Write-Error "Performance Agent failed: $_"
+    }
+}
+
+Set-Alias -Name analyze-performance -Value Invoke-PerformanceAgent
+Functions\Invoke-CodeReviewAgent.ps1
+powershellfunction Invoke-CodeReviewAgent {
+    <#
+    .SYNOPSIS
+    Conducts code review focusing on quality and best practices
+    
+    .PARAMETER FilePath
+    Path to file to review
+    
+    .EXAMPLE
+    Invoke-CodeReviewAgent -FilePath ".\component.js"
+    code-review .\component.js
+    #>
+    
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$false, Position=0)]
+        [string]$FilePath,
+        
+        [Parameter(Mandatory=$false)]
+        [string]$Prompt
+    )
+    
+    if (-not (Test-ClaudeCode)) { return }
+    
+    $agentPrompt = Get-AgentPrompt -AgentName "code-review"
+    if (-not $agentPrompt) { return }
+    
+    Write-Host "👁️  Code Review Agent analyzing..." -ForegroundColor Cyan
+    Write-Host ""
+    
+    $fullPrompt = $agentPrompt
+    
+    if ($FilePath) {
+        if (Test-Path $FilePath) {
+            $fileContent = Get-Content $FilePath -Raw
+            $fullPrompt += "`n`nReview this code:`n`nFile: $FilePath`n`n$fileContent"
+        } else {
+            Write-Error "File not found: $FilePath"
+            return
+        }
+    }
+    
+    if ($Prompt) {
+        $fullPrompt += "`n`nFocus on: $Prompt"
+    }
+    
+    try {
+        $response = claude-code $fullPrompt
+        Write-Host $response
+        
+        Write-AgentLog -AgentName "CodeReview" -FilePath $FilePath -Prompt $Prompt -Response $response
+    }
+    catch {
+        Write-Error "Code Review Agent failed: $_"
+    }
+}
+
+Set-Alias -Name code-review -Value Invoke-CodeReviewAgent
+Functions\Invoke-DebugAgent.ps1
+powershellfunction Invoke-DebugAgent {
+    <#
+    .SYNOPSIS
+    Analyzes bugs and provides debugging guidance
+    
+    .PARAMETER FilePath
+    Path to file with bug
+    
+    .PARAMETER ErrorMessage
+    Error message or stack trace
+    
+    .EXAMPLE
+    Invoke-DebugAgent -FilePath ".\buggy.js" -ErrorMessage "TypeError: Cannot read property 'x' of undefined"
+    debug-issue .\buggy.js
+    #>
+    
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$false, Position=0)]
+        [string]$FilePath,
+        
+        [Parameter(Mandatory=$false)]
+        [string]$ErrorMessage,
+        
+        [Parameter(Mandatory=$false)]
+        [string]$Prompt
+    )
+    
+    if (-not (Test-ClaudeCode)) { return }
+    
+    $agentPrompt = Get-AgentPrompt -AgentName "debugging"
+    if (-not $agentPrompt) { return }
+    
+    Write-Host "🐛 Debug Agent investigating..." -ForegroundColor Red
+    Write-Host ""
+    
+    $fullPrompt = $agentPrompt
+    
+    if ($ErrorMessage) {
+        $fullPrompt += "`n`nError Message:`n$ErrorMessage`n"
+    }
+    
+    if ($FilePath) {
+        if (Test-Path $FilePath) {
+            $fileContent = Get-Content $FilePath -Raw
+            $fullPrompt += "`n`nCode with bug:`n`nFile: $FilePath`n`n$fileContent"
+        } else {
+            Write-Error "File not found: $FilePath"
+            return
+        }
+    }
+    
+    if ($Prompt) {
+        $fullPrompt += "`n`nAdditional Context: $Prompt"
+    }
+    
+    try {
+        $response = claude-code $fullPrompt
+        Write-Host $response
+        
+        Write-AgentLog -AgentName "Debug" -FilePath $FilePath -Prompt $Prompt -Response $response
+    }
+    catch {
+        Write-Error "Debug Agent failed: $_"
+    }
+}
+
+Set-Alias -Name debug-issue -Value Invoke-DebugAgent
+Functions\Invoke-ArchitectureAgent.ps1
+powershellfunction Invoke-ArchitectureAgent {
+    <#
+    .SYNOPSIS
+    Provides architectural guidance and system design
+    
+    .PARAMETER Prompt
+    Description of system to design
+    
+    .EXAMPLE
+    Invoke-ArchitectureAgent -Prompt "Design a scalable e-commerce platform"
+    design-architecture "real-time chat application with 10k users"
+    #>
+    
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$false, Position=0)]
+        [string]$Prompt
+    )
+    
+    if (-not (Test-ClaudeCode)) { return }
+    
+    $agentPrompt = Get-AgentPrompt -AgentName "architecture"
+    if (-not $agentPrompt) { return }
+    
+    Write-Host "🏗️  Architecture Agent designing..." -ForegroundColor DarkCyan
+    Write-Host ""
+    
+    $fullPrompt = $agentPrompt
+    
+    if ($Prompt) {
+        $fullPrompt += "`n`nArchitectural Challenge:`n$Prompt"
+    }
+    
+    try {
+        $response = claude-code $fullPrompt
+        Write-Host $response
+        
+        Write-AgentLog -AgentName "Architecture" -FilePath "" -Prompt $Prompt -Response $response
+    }
+    catch {
+        Write-Error "Architecture Agent failed: $_"
+    }
+}
+
+Set-Alias -Name design-architecture -Value Invoke-ArchitectureAgent
+Functions\Invoke-RefactoringAgent.ps1
+powershellfunction Invoke-RefactoringAgent {
+    <#
+    .SYNOPSIS
+    Identifies refactoring opportunities and suggests improvements
+    
+    .PARAMETER FilePath
+    Path to file to refactor
+    
+    .EXAMPLE
+    Invoke-RefactoringAgent -FilePath ".\legacy-code.js"
+    refactor-code .\legacy-code.js
+    #>
+    
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$false, Position=0)]
+        [string]$FilePath,
+        
+        [Parameter(Mandatory=$false)]
+        [string]$Prompt
+    )
+    
+    if (-not (Test-ClaudeCode)) { return }
+    
+    $agentPrompt = Get-AgentPrompt -AgentName "refactoring"
+    if (-not $agentPrompt) { return }
+    
+    Write-Host "🔧 Refactoring Agent analyzing..." -ForegroundColor DarkYellow
+    Write-Host ""
+    
+    $fullPrompt = $agentPrompt
+    
+    if ($FilePath) {
+        if (Test-Path $FilePath) {
+            $fileContent = Get-Content $FilePath -Raw
+            $fullPrompt += "`n`nAnalyze and suggest refactorings for:`n`nFile: $FilePath`n`n$fileContent"
+        } else {
+            Write-Error "File not found: $FilePath"
+            return
+        }
+    }
+    
+    if ($Prompt) {
+        $fullPrompt += "`n`nFocus on: $Prompt"
+    }
+    
+    try {
+        $response = claude-code $fullPrompt
+        Write-Host $response
+        
+        Write-AgentLog -AgentName "Refactoring" -FilePath $FilePath -Prompt $Prompt -Response $response
+    }
+    catch {
+        Write-Error "Refactoring Agent failed: $_"
+    }
+}
+
+Set-Alias -Name refactor-code -Value Invoke-RefactoringAgent
+Functions\Invoke-AgentPipeline.ps1
+powershellfunction Invoke-AgentPipeline {
+    <#
+    .SYNOPSIS
+    Runs multiple agents in sequence for comprehensive analysis
+    
+    .PARAMETER FilePath
+    Path to file to analyze
+    
+    .PARAMETER Agents
+    Which agents to run (default: all core agents)
+    
+    .EXAMPLE
+    Invoke-AgentPipeline -FilePath ".\module.js"
+    agent-pipeline .\module.js -Agents security,testing,performance
+    #>
+    
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$true, Position=0)]
+        [string]$FilePath,
+        
+        [Parameter(Mandatory=$false)]
+        [ValidateSet('security', 'testing', 'docs', 'performance', 'review', 'all')]
+        [string[]]$Agents = @('all')
+    )
+    
+    if (-not (Test-Path $FilePath)) {
+        Write-Error "File not found: $FilePath"
+        return
+    }
+    
+    Write-Host "🚀 Agent Pipeline Starting..." -ForegroundColor White
+    Write-Host "File: $FilePath" -ForegroundColor Gray
+    Write-Host ""
+    
+    $agentList = if ($Agents -contains 'all') {
+        @('security', 'review', 'performance', 'testing', 'docs')
+    } else {
+        $Agents
+    }
+    
+    $results = @()
+    
+    foreach ($agent in $agentList) {
+        Write-Host ("="*60) -ForegroundColor DarkGray
+        
+        switch ($agent) {
+            'security' {
+                Invoke-SecurityAgent -FilePath $FilePath
+            }
+            'testing' {
+                Invoke-TestingAgent -FilePath $FilePath
+            }
+            'docs' {
+                Invoke-DocsAgent -FilePath $FilePath
+            }
+            'performance' {
+                Invoke-PerformanceAgent -FilePath $FilePath
+            }
+            'review' {
+                Invoke-CodeReviewAgent -FilePath $FilePath
+            }
+        }
+        
+        Write-Host ""
+        Start-Sleep -Seconds 1  # Brief pause between agents
+    }
+    
+    Write-Host ("="*60) -ForegroundColor DarkGray
+    Write-Host "✅ Agent Pipeline Complete!" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "Check logs at: $env:USERPROFILE\.claude-agents\logs\agent-interactions.log" -ForegroundColor Gray
+}
+
+Set-Alias -Name agent-pipeline -Value Invoke-AgentPipeline
+Functions\Compare-AgentResponses.ps1
+powershellfunction Compare-AgentResponses {
+    <#
+    .SYNOPSIS
+    Gets responses from multiple agents on the same question for comparison
+    
+    .PARAMETER Prompt
+    Question/task for agents
+    
+    .PARAMETER FilePath
+    Optional file for context
+    
+    .PARAMETER Agents
+    Which agents to compare
+    
+    .EXAMPLE
+    Compare-AgentResponses -Prompt "How to implement caching?" -Agents architecture,performance
+    compare-agents "best practices for error handling"
+    #>
+    
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$true, Position=0)]
+        [string]$Prompt,
+        
+        [Parameter(Mandatory=$false)]
+        [string]$FilePath,
+        
+        [Parameter(Mandatory=$false)]
+        [string[]]$Agents = @('security', 'performance', 'review')
+    )
+    
+    Write-Host "🔄 Comparing Agent Responses..." -ForegroundColor White
+    Write-Host "Question: $Prompt" -ForegroundColor Gray
+    Write-Host ""
+    
+    foreach ($agent in $Agents) {
+        Write-Host ("="*60) -ForegroundColor DarkGray
+        Write-Host "Agent: $agent" -ForegroundColor White -BackgroundColor DarkGray
+        Write-Host ("="*60) -ForegroundColor DarkGray
+        Write-Host ""
+        
+        $agentPrompt = Get-AgentPrompt -AgentName $agent
+        if ($agentPrompt) {
+            $fullPrompt = $agentPrompt + "`n`n" + $Prompt
+            
+            if ($FilePath -and (Test-Path $FilePath)) {
+                $fileContent = Get-Content $FilePath -Raw
+                $fullPrompt += "`n`nFile Context:`n$fileContent"
+            }
+            
+            try {
+                $response = claude-code $fullPrompt
+                Write-Host $response
+                Write-Host ""
+            }
+            catch {
+                Write-Error "Agent $agent failed: $_"
+            }
+        }
+        
+        Start-Sleep -Seconds 1
+    }
+    
+    Write-Host ("="*60) -ForegroundColor DarkGray
+    Write-Host "✅ Comparison Complete!" -ForegroundColor Green
+}
+
+Set-Alias -Name compare-agents -Value Compare-AgentResponses
+Functions\Get-AgentHelp.ps1
+powershellfunction Get-AgentHelp {
+    <#
+    .SYNOPSIS
+    Displays help information about available agents
+    
+    .EXAMPLE
+    Get-AgentHelp
+    agent-help
+    #>
+    
+    [CmdletBinding()]
+    param()
+    
+    Write-Host ""
+    Write-Host "🤖 Claude Agents Help" -ForegroundColor Cyan
+    Write-Host ("="*60) -ForegroundColor DarkGray
+    Write-Host ""
+    
+    Write-Host "Available Agents:" -ForegroundColor Yellow
+    Write-Host ""
+    
+    Write-Host "🔒 Security Agent" -ForegroundColor Blue
+    Write-Host "   Command: " -NoNewline
+    Write-Host "security-review <file>" -ForegroundColor White
+    Write-Host "   Purpose: Security vulnerability analysis"
+    Write-Host "   Example: security-review .\auth.js"
+    Write-Host ""
+    
+    Write-Host "🧪 Testing Agent" -ForegroundColor Green
+    Write-Host "   Command: " -NoNewline
+    Write-Host "generate-tests <file>" -ForegroundColor White
+    Write-Host "   Purpose: Comprehensive test generation"
+    Write-Host "   Example: generate-tests .\service.js"
+    Write-Host ""
+    
+    Write-Host "📚 Documentation Agent" -ForegroundColor Yellow
+    Write-Host "   Command: " -NoNewline
+    Write-Host "generate-docs <file>" -ForegroundColor White
+    Write-Host "   Purpose: Documentation generation"
+    Write-Host "   Example: generate-docs .\api.js"
+    Write-Host ""
+    
+    Write-Host "⚡ Performance Agent" -ForegroundColor Magenta
+    Write-Host "   Command: " -NoNewline
+    Write-Host "analyze-performance <file>" -ForegroundColor White
+    Write-Host "   Purpose: Performance optimization"
+    Write-Host "   Example: analyze-performance .\slow.js"
+    Write-Host ""
+    
+    Write-Host "👁️  Code Review Agent" -ForegroundColor Cyan
+    Write-Host "   Command: " -NoNewline
+    Write-Host "code-review <file>" -ForegroundColor White
+    Write-Host "   Purpose: Code quality review"
+    Write-Host "   Example: code-review .\component.js"
+    Write-Host ""
+    
+    Write-Host "🐛 Debug Agent" -ForegroundColor Red
+    Write-Host "   Command: " -NoNewline
+    Write-Host "debug-issue <file>" -ForegroundColor White
+    Write-Host "   Purpose: Bug analysis and debugging"
+    Write-Host "   Example: debug-issue .\buggy.js -ErrorMessage 'TypeError...'"
+    Write-Host ""
+    
+    Write-Host "🏗️  Architecture Agent" -ForegroundColor DarkCyan
+    Write-Host "   Command: " -NoNewline
+    Write-Host "design-architecture '<prompt>'" -ForegroundColor White
+    Write-Host "   Purpose: System architecture design"
+    Write-Host "   Example: design-architecture 'scalable chat app'"
+    Write-Host ""
+    
+    Write-Host "🔧 Refactoring Agent" -ForegroundColor DarkYellow
+    Write-Host "   Command: " -NoNewline
+    Write-Host "refactor-code <file>" -ForegroundColor White
+    Write-Host "   Purpose: Code refactoring suggestions"
+    Write-Host "   Example: refactor-code .\legacy.js"
+    Write-Host ""
+    
+    Write-Host ("="*60) -ForegroundColor DarkGray
+    Write-Host ""
+    Write-Host "Utility Commands:" -ForegroundColor Yellow
+    Write-Host ""
+    
+    Write-Host "🚀 agent-pipeline <file>" -ForegroundColor White
+    Write-Host "   Run multiple agents in sequence"
+    Write-Host "   Example: agent-pipeline .\module.js"
+    Write-Host ""
+    
+    Write-Host "🔄 compare-agents '<prompt>'" -ForegroundColor White
+    Write-Host "   Compare responses from multiple agents"
+    Write-Host "   Example: compare-agents 'how to handle errors?'"
+    Write-Host ""
+    
+    Write-Host ("="*60) -ForegroundColor DarkGray
+    Write-Host ""
+    Write-Host "For more info: Get-Help <command-name> -Detailed" -ForegroundColor Gray
+    Write-Host ""
+}
+
+Set-Alias -Name agent-help -Value Get-AgentHelp
+
+3. VS Code Integration
+Add to existing tasks.json in %APPDATA%\Code\User\
+json{
+  "label": "Agent: Security Review",
+  "type": "shell",
+  "command": "powershell",
+  "args": ["-Command", "security-review '${file}'"],
+  "presentation": {
+    "reveal": "always",
+    "panel": "dedicated",
+    "focus": true
+  },
+  "problemMatcher": []
+},
+{
+  "label": "Agent: Generate Tests",
+  "type": "shell",
+  "command": "powershell",
+  "args": ["-Command", "generate-tests '${file}'"],
+  "presentation": {
+    "reveal": "always",
+    "panel": "dedicated"
+  }
+},
+{
+  "label": "Agent: Generate Documentation",
+  "type": "shell",
+  "command": "powershell",
+  "args": ["-Command", "generate-docs '${file}'"],
+  "presentation": {
+    "reveal": "always",
+    "panel": "dedicated"
+  }
+},
+{
+  "label": "Agent: Performance Analysis",
+  "type": "shell",
+  "command": "powershell",
+  "args": ["-Command", "analyze-performance '${file}'"],
+  "presentation": {
+    "reveal": "always",
+    "panel": "dedicated"
+  }
+},
+{
+  "label": "Agent: Code Review",
+  "type": "shell",
+  "command": "powershell",
+  "args": ["-Command", "code-review '${file}'"],
+  "presentation": {
+    "reveal": "always",
+    "panel": "dedicated"
+  }
+},
+{
+  "label": "Agent: Debug Issue",
+  "type": "shell",
+  "command": "powershell",
+  "args": ["-Command", "debug-issue '${file}'"],
+  "presentation": {
+    "reveal": "always",
+    "panel": "dedicated"
+  }
+},
+{
+  "label": "Agent: Refactor Code",
+  "type": "shell",
+  "command": "powershell",
+  "args": ["-Command", "refactor-code '${file}'"],
+  "presentation": {
+    "reveal": "always",
+    "panel": "dedicated"
+  }
+},
+{
+  "label": "Agent: Full Pipeline",
+  "type": "shell",
+  "command": "powershell",
+  "args": ["-Command", "agent-pipeline '${file}'"],
+  "presentation": {
+    "reveal": "always",
+    "panel": "new",
+    "focus": true
+  }
+},
+{
+  "label": "Agent: Compare Responses",
+  "type": "shell",
+  "command": "powershell",
+  "args": ["-Command", "compare-agents '${input:agentComparePrompt}'"],
+  "presentation": {
+    "reveal": "always",
+    "panel": "new"
+  }
+}
+Add input variables to tasks.json:
+json"inputs": [
+  {
+    "id": "agentComparePrompt",
+    "type": "promptString",
+    "description": "Enter prompt to compare across agents"
+  }
+]
+Add to existing keybindings.json in %APPDATA%\Code\User\
+json[
+  {
+    "key": "ctrl+shift+alt+s",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Agent: Security Review"
+  },
+  {
+    "key": "ctrl+shift+alt+t",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Agent: Generate Tests"
+  },
+  {
+    "key": "ctrl+shift+alt+d",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Agent: Generate Documentation"
+  },
+  {
+    "key": "ctrl+shift+alt+p",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Agent: Performance Analysis"
+  },
+  {
+    "key": "ctrl+shift+alt+r",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Agent: Code Review"
+  },
+  {
+    "key": "ctrl+shift+alt+b",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Agent: Debug Issue"
+  },
+  {
+    "key": "ctrl+shift+alt+f",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Agent: Refactor Code"
+  },
+  {
+    "key": "ctrl+shift+alt+a",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Agent: Full Pipeline"
+  }
+]
+
+4. Code Snippets
+Create agents.code-snippets in %APPDATA%\Code\User\snippets\
+json{
+  "Security Review Marker": {
+    "prefix": "aisec",
+    "body": [
+      "// 🔒 SECURITY-AGENT: ${1:Review this code for vulnerabilities}",
+      "$0"
+    ],
+    "description": "Mark code for security agent review"
+  },
+  "Testing Agent Marker": {
+    "prefix": "aitest",
+    "body": [
+      "// 🧪 TESTING-AGENT: ${1:Generate tests for this function}",
+      "$0"
+    ],
+    "description": "Mark code for test generation"
+  },
+  "Documentation Agent Marker": {
+    "prefix": "aidoc",
+    "body": [
+      "// 📚 DOCS-AGENT: ${1:Document this function/class}",
+      "$0"
+    ],
+    "description": "Mark code for documentation"
+  },
+  "Performance Agent Marker": {
+    "prefix": "aiperf",
+    "body": [
+      "// ⚡ PERFORMANCE-AGENT: ${1:Optimize this code}",
+      "$0"
+    ],
+    "description": "Mark code for performance analysis"
+  },
+  "Code Review Agent Marker": {
+    "prefix": "aireview",
+    "body": [
+      "// 👁️ REVIEW-AGENT: ${1:Review code quality}",
+      "$0"
+    ],
+    "description": "Mark code for quality review"
+  },
+  "Debug Agent Marker": {
+    "prefix": "aidebug",
+    "body": [
+      "// 🐛 DEBUG-AGENT: ${1:Investigate this bug}",
+      "// Error: ${2:error message}",
+      "$0"
+    ],
+    "description": "Mark code for debugging"
+  },
+  "Refactoring Agent Marker": {
+    "prefix": "airefactor",
+    "body": [
+      "// 🔧 REFACTOR-AGENT: ${1:Suggest refactorings}",
+      "$0"
+    ],
+    "description": "Mark code for refactoring"
+  },
+  "Agent TODO": {
+    "prefix": "aitodo",
+    "body": [
+      "// AI-TODO: ${1:task description}",
+      "// Agent: ${2|Security,Testing,Docs,Performance,Review,Debug,Refactor|}",
+      "// Priority: ${3|High,Medium,Low|}",
+      "$0"
+    ],
+    "description": "Create AI agent task"
+  },
+  "Full Agent Pipeline": {
+    "prefix": "aipipe",
+    "body": [
+      "// 🚀 AGENT-PIPELINE: Run all agents on this code",
+      "// Agents: Security → Review → Performance → Testing → Docs",
+      "$0"
+    ],
+    "description": "Mark for full agent pipeline"
+  }
+}
+
+5. PowerShell Profile Update
+Add to %USERPROFILE%\Documents\PowerShell\Microsoft.VSCode_profile.ps1:
+powershell# Import Claude Agents Module
+$agentsModulePath = "$HOME\Documents\PowerShell\Modules\ClaudeAgents"
+if (Test-Path $agentsModulePath) {
+    Import-Module ClaudeAgents
+    Write-Host "✓ Claude Agents loaded" -ForegroundColor Green
+    Write-Host "  Type 'agent-help' for available commands" -ForegroundColor Gray
+} else {
+    Write-Host "⚠ Claude Agents module not found at: $agentsModulePath" -ForegroundColor Yellow
+}
+
+# Quick agent shortcuts
+function sa { security-review $args[0] }
+function ta { generate-tests $args[0] }
+function da { generate-docs $args[0] }
+function pa { analyze-performance $args[0] }
+function ra { code-review $args[0] }
+function ap { agent-pipeline $args[0] }
+function ca { compare-agents $args }
+
+Write-Host "Quick shortcuts:" -ForegroundColor Cyan
+Write-Host "  sa = security-review" -ForegroundColor Gray
+Write-Host "  ta = generate-tests" -ForegroundColor Gray
+Write-Host "  da = generate-docs" -ForegroundColor Gray
+Write-Host "  pa = analyze-performance" -ForegroundColor Gray
+Write-Host "  ra = code-review" -ForegroundColor Gray
+Write-Host "  ap = agent-pipeline" -ForegroundColor Gray
+Write-Host "  ca = compare-agents" -ForegroundColor Gray
+Write-Host ""
+
+6. Documentation File
+Create CLAUDE-AGENTS-GUIDE.md in %USERPROFILE%\Documents\
+markdown# Claude Agents Guide
+
+## Overview
+Specialized AI agents for software development tasks, integrated globally in VS Code.
+
+## Available Agents
+
+### 🔒 Security Agent
+**Purpose**: Security vulnerability analysis
+**Command**: `security-review <file>`
+**Keyboard**: `Ctrl+Shift+Alt+S`
+**Focus**: OWASP Top 10, authentication, input validation
+
+### 🧪 Testing Agent
+**Purpose**: Test generation
+**Command**: `generate-tests <file>`
+**Keyboard**: `Ctrl+Shift+Alt+T`
+**Focus**: Unit, integration, edge cases
+
+### 📚 Documentation Agent
+**Purpose**: Documentation generation
+**Command**: `generate-docs <file>`
+**Keyboard**: `Ctrl+Shift+Alt+D`
+**Focus**: API docs, README, inline comments
+
+### ⚡ Performance Agent
+**Purpose**: Performance optimization
+**Command**: `analyze-performance <file>`
+**Keyboard**: `Ctrl+Shift+Alt+P`
+**Focus**: Complexity analysis, bottlenecks
+
+### 👁️ Code Review Agent
+**Purpose**: Code quality review
+**Command**: `code-review <file>`
+**Keyboard**: `Ctrl+Shift+Alt+R`
+**Focus**: Clean code, best practices, SOLID
+
+### 🐛 Debug Agent
+**Purpose**: Bug analysis
+**Command**: `debug-issue <file>`
+**Keyboard**: `Ctrl+Shift+Alt+B`
+**Focus**: Root cause analysis, fixes
+
+### 🏗️ Architecture Agent
+**Purpose**: System design
+**Command**: `design-architecture '<prompt>'`
+**Focus**: Scalability, patterns, tech stack
+
+### 🔧 Refactoring Agent
+**Purpose**: Code improvement
+**Command**: `refactor-code <file>`
+**Keyboard**: `Ctrl+Shift+Alt+F`
+**Focus**: Code smells, refactoring patterns
+
+## Workflows
+
+### Single Agent
+```powershell
+# PowerShell terminal
+security-review .\auth.js
+generate-tests .\service.js
+```
+
+### Agent Pipeline
+```powershell
+# Run all agents in sequence
+agent-pipeline .\module.js
+
+# Or in VS Code: Ctrl+Shift+Alt+A
+```
+
+### Compare Agents
+```powershell
+# Get multiple perspectives
+compare-agents "best way to handle errors?"
+compare-agents "caching strategy?" -Agents architecture,performance
+```
+
+### VS Code Tasks
+1. `Ctrl+Shift+P`
+2. Type "Tasks: Run Task"
+3. Select agent task
+
+## Code Snippets
+
+Type in VS Code and press Tab:
+- `aisec` → Security review marker
+- `aitest` → Testing marker
+- `aidoc` → Documentation marker
+- `aiperf` → Performance marker
+- `aireview` → Code review marker
+- `aidebug` → Debug marker
+- `airefactor` → Refactoring marker
+- `aitodo` → AI TODO with agent selection
+- `aipipe` → Full pipeline marker
+
+## Best Practices
+
+### When to Use Which Agent
+
+**Security Agent**: 
+- Authentication/authorization code
+- User input handling
+- API endpoints
+- Before production deployment
+
+**Testing Agent**:
+- After implementing features
+- When test coverage is low
+- Before refactoring
+
+**Documentation Agent**:
+- Public APIs
+- Complex logic
+- After major changes
+
+**Performance Agent**:
+- Slow features
+- Database-heavy code
+- Before scaling
+
+**Code Review Agent**:
+- Before merging PRs
+- Legacy code assessment
+- Learning best practices
+
+**Debug Agent**:
+- Unexpected errors
+- Complex bugs
+- Production issues
+
+**Architecture Agent**:
+- New projects
+- Major features
+- Scaling decisions
+
+**Refactoring Agent**:
+- Legacy code modernization
+- Code smell identification
+- Before adding features to messy code
+
+## Keyboard Shortcuts
+
+| Shortcut | Agent |
+|----------|-------|
+| `Ctrl+Shift+Alt+S` | Security Review |
+| `Ctrl+Shift+Alt+T` | Generate Tests |
+| `Ctrl+Shift+Alt+D` | Generate Docs |
+| `Ctrl+Shift+Alt+P` | Performance Analysis |
+| `Ctrl+Shift+Alt+R` | Code Review |
+| `Ctrl+Shift+Alt+B` | Debug Issue |
+| `Ctrl+Shift+Alt+F` | Refactor Code |
+| `Ctrl+Shift+Alt+A` | Full Pipeline |
+
+## Quick Terminal Shortcuts
+```powershell
+sa file.js    # security-review
+ta file.js    # generate-tests
+da file.js    # generate-docs
+pa file.js    # analyze-performance
+ra file.js    # code-review
+ap file.js    # agent-pipeline
+ca "prompt"   # compare-agents
+```
+
+## Logs
+
+All agent interactions are logged to:
+```
+%USERPROFILE%\.claude-agents\logs\agent-interactions.log
+```
+
+## Customization
+
+Agent prompts are in:
+```
+%USERPROFILE%\.claude-agents\agents\
+```
+
+You can edit these files to customize agent behavior!
+
+## Troubleshooting
+
+**Agents not working?**
+1. Check `claude-code` is in PATH: `Get-Command claude-code`
+2. Reload PowerShell profile: `. $PROFILE`
+3. Reload VS Code: `Ctrl+Shift+P` → "Developer: Reload Window"
+
+**Module not loading?**
+```powershell
+Import-Module ClaudeAgents -Force
+```
+
+**Need help?**
+```powershell
+agent-help
+Get-Help Invoke-SecurityAgent -Detailed
+```
+
+## Examples
+
+### Example 1: Feature Development
+```powershell
+# 1. Write code with Copilot
+# 2. Security review
+security-review .\feature.js
+
+# 3. Generate tests
+generate-tests .\feature.js
+
+# 4. Add documentation
+generate-docs .\feature.js
+```
+
+### Example 2: Bug Fix
+```powershell
+# 1. Analyze bug
+debug-issue .\buggy.js -ErrorMessage "TypeError..."
+
+# 2. Review fix
+code-review .\buggy.js
+
+# 3. Add regression test
+generate-tests .\buggy.js
+```
+
+### Example 3: Legacy Code Improvement
+```powershell
+# 1. Full pipeline
+agent-pipeline .\legacy.js
+
+# 2. Focus on refactoring
+refactor-code .\legacy.js
+
+# 3. Verify improvements
+code-review .\legacy.js
+```
+
+## Advanced Usage
+
+### Custom Agent Workflows
+```powershell
+# Create your own workflow script
+function my-workflow {
+    param([string]$file)
+    
+    Write-Host "🚀 Custom Workflow Starting..."
+    
+    # Your custom sequence
+    security-review $file
+    code-review $file
+    refactor-code $file
+    generate-tests $file
+    
+    Write-Host "✅ Workflow Complete!"
+}
+```
+
+### Batch Processing
+```powershell
+# Run security review on all JS files
+Get-ChildItem -Filter *.js -Recurse | ForEach-Object {
+    security-review $_.FullName
+}
+```
+
+## Tips
+
+1. **Start with agent-pipeline** for comprehensive analysis
+2. **Use compare-agents** when unsure about approach
+3. **Review agent prompts** to understand what they check
+4. **Customize prompts** for your project's standards
+5. **Log everything** - useful for learning
+6. **Combine with Copilot** for maximum productivity
+
+## Integration with Other Tools
+
+### With Git
+```powershell
+# Pre-commit hook idea
+git diff --name-only | ForEach-Object {
+    security-review $_
+}
+```
+
+### With npm scripts
+```json
+{
+  "scripts": {
+    "ai-review": "powershell -Command agent-pipeline src/index.js"
+  }
+}
+```
+
+---
+
+**Happy coding with your AI agent team! 🤖**
+
+Installation Instructions
+Please provide these step-by-step installation instructions:
+Step 1: Create Directory Structure
+powershell# Create agent directories
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.claude-agents\agents" -Force
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.claude-agents\config" -Force
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.claude-agents\logs" -Force
+
+# Create PowerShell module directory
+New-Item -ItemType Directory -Path "$HOME\Documents\PowerShell\Modules\ClaudeAgents\Functions" -Force
+Step 2: Create All Agent Prompt Files
+[Copilot will create each .txt file with the prompts above]
+Step 3: Create PowerShell Module Files
+[Copilot will create the .psm1, .psd1, and all function files]
+Step 4: Update VS Code Configuration
+[Copilot will provide the JSON to merge into existing tasks.json and keybindings.json]
+Step 5: Create Snippets
+[Copilot will create the snippets file]
+Step 6: Update PowerShell Profile
+[Copilot will provide the code to add to Microsoft.VSCode_profile.ps1]
+Step 7: Create Documentation
+[Copilot will create the CLAUDE-AGENTS-GUIDE.md file]
+Step 8: Test Installation
+powershell# Reload PowerShell profile
+. $PROFILE
+
+# Test agent help
+agent-help
+
+# Test a simple agent
+security-review --help
+
+# Reload VS Code
+# Ctrl+Shift+P → "Developer: Reload Window"
+
+# Test keyboard shortcut
+# Open any file → Ctrl+Shift+Alt+S
+
+Expected Output
+After installation:
+
+✅ All 8 agent prompt files created
+✅ PowerShell module with 11 functions
+✅ VS Code tasks for all agents
+✅ Keyboard shortcuts configured
+✅ Code snippets available
+✅ PowerShell profile updated
+✅ Documentation created
+✅ Log directory ready
+
+
+Please create all files in order, explaining what each does. Make sure everything is production-ready and follows Windows 11 and PowerShell 7+ best practices.

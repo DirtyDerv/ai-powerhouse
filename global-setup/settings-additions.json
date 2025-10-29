@@ -1,0 +1,115 @@
+{
+    "_comment": "AI Powerhouse Global Settings - MERGE with your existing settings.json",
+    
+    "terminal.integrated.env.windows": {
+        "AI_LOG_PATH": "${env:USERPROFILE}\\.ai-logs",
+        "AI_TOOLS_ENABLED": "true"
+    },
+    
+    "terminal.integrated.profiles.windows": {
+        "AI PowerShell": {
+            "source": "PowerShell",
+            "args": [
+                "-NoLogo",
+                "-ExecutionPolicy", "RemoteSigned",
+                "-Command",
+                "& { Import-Module AIHelpers -Force -DisableNameChecking -ErrorAction SilentlyContinue; . $PROFILE }"
+            ],
+            "icon": "robot"
+        }
+    },
+    
+    "terminal.integrated.defaultProfile.windows": "AI PowerShell",
+    
+    "files.associations": {
+        "*.ai-log": "json",
+        "*.ai-result": "markdown",
+        "*.claude": "markdown",
+        "*.gemini": "markdown",  
+        "*.gpt": "markdown"
+    },
+    
+    "files.autoSave": "onFocusChange",
+    "files.autoSaveDelay": 500,
+    
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    },
+    
+    "workbench.colorCustomizations": {
+        "terminal.ansiBlue": "#0066cc",
+        "terminal.ansiGreen": "#00cc66", 
+        "terminal.ansiYellow": "#cccc00",
+        "terminal.ansiMagenta": "#cc00cc"
+    },
+    
+    "git.enableCommitSigning": false,
+    "git.defaultCommitMessage": "AI-assisted changes",
+    
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "*.ai-log": "${capture}.claude, ${capture}.gemini, ${capture}.gpt",
+        "*.ai-result": "${capture}.claude, ${capture}.gemini, ${capture}.gpt"
+    },
+    
+    "search.exclude": {
+        "**/.ai-logs": true,
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.ai-log": true
+    },
+    
+    "files.exclude": {
+        "**/.ai-logs": false
+    },
+    
+    "extensions.recommendations": [
+        "ms-vscode.powershell",
+        "ms-python.python",
+        "ms-vscode.vscode-typescript-next",
+        "github.copilot",
+        "github.copilot-chat",
+        "ms-vscode.remote-wsl",
+        "ms-vscode-remote.remote-containers"
+    ],
+    
+    "powershell.powerShellDefaultVersion": "PowerShell (x64)",
+    "powershell.enableProfileLoading": true,
+    
+    "terminal.integrated.commandsToSkipShell": [
+        "workbench.action.tasks.runTask"
+    ],
+    
+    "task.autoDetect": "on",
+    "task.showDecorations": true,
+    
+    "problems.decorations.enabled": true,
+    
+    "window.commandCenter": true,
+    
+    "workbench.startupEditor": "welcomePageInEmptyWorkbench",
+    
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.tabCompletion": "on",
+    
+    "output.smartScroll.enabled": true,
+    
+    "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.shellIntegration.enabled": true,
+    
+    "debug.console.fontSize": 14,
+    "debug.console.lineHeight": 1.2,
+    
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    
+    "editor.minimap.enabled": true,
+    "editor.minimap.showSlider": "always",
+    
+    "breadcrumbs.enabled": true,
+    "breadcrumbs.showFiles": true,
+    "breadcrumbs.showSymbols": true,
+    
+    "scm.defaultViewMode": "tree"
+}

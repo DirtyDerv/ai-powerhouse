@@ -1,0 +1,160 @@
+[
+    {
+        "key": "ctrl+shift+c",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Claude Code: Execute Prompt",
+        "when": "!inDebugMode"
+    },
+    {
+        "key": "ctrl+shift+alt+c",
+        "command": "workbench.action.tasks.runTask", 
+        "args": "Claude Code: Fix Current File",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+g",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Gemini CLI: Custom Prompt",
+        "when": "!inDebugMode"
+    },
+    {
+        "key": "ctrl+shift+alt+g",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Gemini CLI: Analyze Current File", 
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+alt+c",
+        "command": "workbench.action.tasks.runTask",
+        "args": "GitHub Copilot: Chat",
+        "when": "!inDebugMode"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "workbench.action.tasks.runTask",
+        "args": "GitHub Copilot: Explain Code",
+        "when": "editorHasSelection"
+    },
+    {
+        "key": "ctrl+shift+t",
+        "command": "workbench.action.tasks.runTask",
+        "args": "GitHub Copilot: Generate Tests",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+a",
+        "command": "workbench.action.tasks.runTask",
+        "args": "AI Compare: All Models",
+        "when": "!inDebugMode"
+    },
+    {
+        "key": "ctrl+shift+alt+a",
+        "command": "workbench.action.tasks.runTask",
+        "args": "AI Pipeline: Implement & Review",
+        "when": "!inDebugMode"
+    },
+    {
+        "key": "ctrl+shift+alt+a",
+        "command": "workbench.action.tasks.runTask",
+        "args": "AI Pipeline: Full Analysis",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+shift+m",
+        "command": "workbench.action.tasks.runTask",
+        "args": "AI Auto Mode: Enable",
+        "when": "!inDebugMode"
+    },
+    {
+        "key": "ctrl+alt+shift+s",
+        "command": "workbench.action.tasks.runTask", 
+        "args": "AI Auto Mode: Status",
+        "when": "!inDebugMode"
+    },
+    {
+        "key": "ctrl+shift+alt+s",
+        "command": "workbench.action.tasks.runTask",
+        "args": "AI Tools: Status Check",
+        "when": "!inDebugMode"
+    },
+    {
+        "key": "ctrl+shift+alt+l",
+        "command": "workbench.action.tasks.runTask",
+        "args": "AI Logs: Open Directory",
+        "when": "!inDebugMode"
+    },
+    {
+        "key": "ctrl+shift+alt+m",
+        "command": "workbench.action.tasks.runTask",
+        "args": "AI Quick Pick Menu",
+        "when": "!inDebugMode"
+    },
+    {
+        "key": "f1",
+        "command": "workbench.action.tasks.runTask",
+        "args": "AI Quick Pick Menu",
+        "when": "!inDebugMode && !suggestWidgetVisible && !renameInputVisible && !inSnippetMode && !quickFixWidgetVisible"
+    },
+    {
+        "key": "ctrl+shift+alt+d",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Gemini CLI: Generate Documentation",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+alt+r",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Claude Code: Refactor Current File",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+alt+s",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Agent: Security Review"
+    },
+    {
+        "key": "ctrl+shift+alt+t",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Agent: Generate Tests"
+    },
+    {
+        "key": "ctrl+shift+alt+d",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Agent: Generate Documentation"
+    },
+    {
+        "key": "ctrl+shift+alt+p",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Agent: Performance Analysis"
+    },
+    {
+        "key": "ctrl+shift+alt+r",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Agent: Code Review"
+    },
+    {
+        "key": "ctrl+shift+alt+b",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Agent: Debug Issue"
+    },
+    {
+        "key": "ctrl+shift+alt+f",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Agent: Refactor Code"
+    },
+    {
+        "key": "ctrl+shift+alt+a",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Agent: Full Pipeline"
+    },
+    {
+        "key": "ctrl+shift+alt+e",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Agent: Electronics Design"
+    },
+    {
+        "key": "ctrl+shift+alt+c",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Agent: Component Pricing"
+    }
+]

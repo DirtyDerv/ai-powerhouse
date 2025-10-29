@@ -1,0 +1,307 @@
+{
+    "AI Claude Code Task": {
+        "prefix": "aicc",
+        "body": [
+            "// TODO: Claude Code - ${1:description}",
+            "// Prompt: ${2:Enter your prompt for Claude}",
+            "// Priority: ${3|high,medium,low|}",
+            "// File: ${TM_FILENAME}",
+            "// Date: ${CURRENT_DATE}",
+            "$0"
+        ],
+        "description": "Insert Claude Code task marker"
+    },
+    
+    "AI Gemini Analysis": {
+        "prefix": "aigemini", 
+        "body": [
+            "// TODO: Gemini Analysis - ${1:description}",
+            "// Analysis Type: ${2|security,performance,maintainability,best-practices|}",
+            "// Prompt: ${3:Enter your prompt for Gemini}",
+            "// File: ${TM_FILENAME}",
+            "// Date: ${CURRENT_DATE}",
+            "$0"
+        ],
+        "description": "Insert Gemini analysis task marker"
+    },
+    
+    "AI Codex Generation": {
+        "prefix": "aigpt",
+        "body": [
+            "// TODO: Codex Generate - ${1:description}",
+            "// Generation Type: ${2|code,tests,documentation,optimization|}",
+            "// Prompt: ${3:Enter your prompt for Codex}",
+            "// File: ${TM_FILENAME}",
+            "// Date: ${CURRENT_DATE}",
+            "$0"
+        ],
+        "description": "Insert Codex generation task marker"
+    },
+    "AI Auto-Context": {
+        "prefix": "ai-auto",
+        "body": [
+            "// 🤖 AUTO-AI ENGAGED",
+            "// Context: ${1:What you're asking GitHub Copilot}",
+            "// ",
+            "// 🔵 Claude Analysis: ${2:claude_insight}",
+            "// 🟢 Gemini Review: ${3:gemini_perspective}",
+            "// 🟣 GitHub Copilot: ${4:copilot_suggestion}",
+            "// ",
+            "// 🎯 Combined Solution:",
+            "${5:implementation}",
+            "",
+            "// 📝 Auto-logged to: ~/.ai-logs/auto-context.log"
+        ],
+        "description": "Auto-trigger all three AIs when chatting with Copilot"
+    },
+    "Smart AI Chat": {
+        "prefix": "chat-ai",
+        "body": [
+            "/*",
+            " * 💬 Smart AI Chat Session",
+            " * Question: ${1:Your question to GitHub Copilot}",
+            " * ",
+            " * 🤖 Auto-Analysis Triggered:",
+            " * • Claude: ${2:claude_analysis}",
+            " * • Gemini: ${3:gemini_analysis} ", 
+            " * • Copilot: ${4:copilot_response}",
+            " * ",
+            " * 🎯 Best Approach: ${5:combined_solution}",
+            " */"
+        ],
+        "description": "Smart chat template that engages all AIs automatically"
+    },
+    "Auto AI Compare": {
+        "prefix": "compare-auto",
+        "body": [
+            "// 🚀 AUTO-COMPARE MODE ACTIVATED",
+            "// Prompt: \"${1:your_question}\"",
+            "// ",
+            "// Results will appear automatically from:",
+            "// 🔵 Claude | 🟢 Gemini | 🟣 GitHub Copilot",
+            "// ",
+            "// Implementation:",
+            "${2:code_here}"
+        ],
+        "description": "Auto-trigger AI comparison when chatting"
+    },
+    
+    "AI GitHub Copilot Integration": {
+        "prefix": "aicopilot",
+        "body": [
+            "// TODO: GitHub Copilot - ${1:description}",
+            "// Action: ${2|chat,explain,generate,fix,optimize,test|}",
+            "// Prompt: ${3:Enter your prompt for GitHub Copilot}",
+            "// File: ${TM_FILENAME}",
+            "// Date: ${CURRENT_DATE}",
+            "$0"
+        ],
+        "description": "Insert GitHub Copilot integration task marker"
+    },
+    
+    "AI Task Selection": {
+        "prefix": "aitodo",
+        "body": [
+            "// TODO: AI Task - ${1:description}",
+            "// AI Tool: ${2|claude,gemini,openai,compare-all|}",
+            "// Task Type: ${3|fix,refactor,analyze,generate,document,test|}",
+            "// Prompt: ${4:Enter your detailed prompt}",
+            "// Priority: ${5|high,medium,low|}",
+            "// File: ${TM_FILENAME}",
+            "// Date: ${CURRENT_DATE}",
+            "// Status: ${6|pending,in-progress,completed|}",
+            "$0"
+        ],
+        "description": "Insert AI task with dropdown selections"
+    },
+    
+    "AI Code Review Request": {
+        "prefix": "aireview",
+        "body": [
+            "/*",
+            " * AI CODE REVIEW REQUEST",
+            " * ======================",
+            " * Description: ${1:What needs to be reviewed}",
+            " * Focus Areas: ${2|security,performance,maintainability,best-practices,all|}",
+            " * AI Tools: ${3|claude,gemini,openai,all|}",
+            " * Reviewer Notes: ${4:Any specific concerns or areas to focus on}",
+            " * ",
+            " * Review Checklist:",
+            " * [ ] Security vulnerabilities",
+            " * [ ] Performance bottlenecks", 
+            " * [ ] Code maintainability",
+            " * [ ] Best practice compliance",
+            " * [ ] Error handling",
+            " * [ ] Documentation quality",
+            " */",
+            "$0"
+        ],
+        "description": "Request AI code review with comprehensive checklist"
+    },
+    
+    "AI Documentation Request": {
+        "prefix": "aidoc",
+        "body": [
+            "/**",
+            " * AI DOCUMENTATION REQUEST",
+            " * ========================",
+            " * Function/Class: ${1:Name of function or class}",
+            " * Purpose: ${2:Brief description of what this does}",
+            " * AI Tool: ${3|gemini,claude,openai|}",
+            " * Documentation Type: ${4|inline,external,api,user-guide|}",
+            " * ",
+            " * Required Documentation:",
+            " * [ ] Function/method descriptions",
+            " * [ ] Parameter documentation", 
+            " * [ ] Return value documentation",
+            " * [ ] Usage examples",
+            " * [ ] Error conditions",
+            " * [ ] Performance considerations",
+            " */",
+            "$0"
+        ],
+        "description": "Request AI documentation generation"
+    },
+    
+    "AI Test Generation Request": {
+        "prefix": "aitest",
+        "body": [
+            "/*",
+            " * AI TEST GENERATION REQUEST",
+            " * ==========================",
+            " * Target: ${1:Function/class/module to test}",
+            " * Test Framework: ${2|jest,mocha,pytest,junit,nunit|}",
+            " * AI Tool: ${3|openai,claude,gemini|}",
+            " * Coverage Goal: ${4|unit,integration,e2e|}",
+            " * ",
+            " * Test Requirements:",
+            " * [ ] Happy path scenarios",
+            " * [ ] Edge cases",
+            " * [ ] Error conditions",
+            " * [ ] Boundary value testing",
+            " * [ ] Mock/stub requirements",
+            " * [ ] Performance tests",
+            " * ",
+            " * Special Considerations: ${5:Any specific testing requirements}",
+            " */",
+            "$0"
+        ],
+        "description": "Request AI test generation with comprehensive requirements"
+    },
+    
+    "AI Bug Fix Request": {
+        "prefix": "aifix",
+        "body": [
+            "// BUG FIX REQUEST - AI ASSISTANCE",
+            "// ===============================",
+            "// Bug Description: ${1:Describe the bug}",
+            "// Symptoms: ${2:What's happening}",
+            "// Expected Behavior: ${3:What should happen}",
+            "// AI Tool: ${4|claude,gemini,openai|}",
+            "// Severity: ${5|critical,high,medium,low|}",
+            "// ",
+            "// Steps to Reproduce:",
+            "// 1. ${6:First step}",
+            "// 2. ${7:Second step}",
+            "// 3. ${8:Third step}",
+            "// ",
+            "// Error Messages/Logs:",
+            "// ${9:Paste any error messages or relevant logs}",
+            "// ",
+            "// Environment:",
+            "// - OS: ${10:Operating System}",
+            "// - Language/Framework: ${11:Programming language or framework}",
+            "// - Version: ${12:Version information}",
+            "$0"
+        ],
+        "description": "Request AI assistance for bug fixing"
+    },
+    
+    "AI Comparison Request": {
+        "prefix": "aicompare",
+        "body": [
+            "/*",
+            " * AI COMPARISON REQUEST",
+            " * =====================",
+            " * Comparison Topic: ${1:What to compare across AI models}",
+            " * Models: Claude + Gemini + OpenAI",
+            " * Focus: ${2|implementation,analysis,optimization,best-practices|}",
+            " * ",
+            " * Prompt for all models:",
+            " * ${3:Enter the exact prompt to send to all three AI models}",
+            " * ",
+            " * Comparison Criteria:",
+            " * [ ] Accuracy of response",
+            " * [ ] Code quality (if applicable)",
+            " * [ ] Completeness",
+            " * [ ] Performance considerations",
+            " * [ ] Best practices adherence",
+            " * [ ] Innovation/creativity",
+            " * ",
+            " * Expected Output: ${4:What format/type of response expected}",
+            " */",
+            "$0"
+        ],
+        "description": "Request comparison across all three AI models"
+    },
+    
+    "AI Implementation Pipeline": {
+        "prefix": "aipipeline",
+        "body": [
+            "/*",
+            " * AI IMPLEMENTATION PIPELINE",
+            " * ==========================",
+            " * Feature: ${1:Feature or component name}",
+            " * ",
+            " * Pipeline Steps:",
+            " * 1. 🔵 CLAUDE: Implementation",
+            " * 2. 🟢 GEMINI: Code Review & Security Analysis", 
+            " * 3. 🟡 OPENAI: Optimization & Testing",
+            " * ",
+            " * Requirements:",
+            " * ${2:Detailed requirements for the implementation}",
+            " * ",
+            " * Constraints:",
+            " * - Performance: ${3:Performance requirements}",
+            " * - Security: ${4:Security considerations}",
+            " * - Compatibility: ${5:Compatibility requirements}",
+            " * ",
+            " * Success Criteria:",
+            " * [ ] Functional requirements met",
+            " * [ ] Code passes review",
+            " * [ ] Security scan clean",
+            " * [ ] Performance benchmarks met",
+            " * [ ] Tests passing",
+            " */",
+            "$0"
+        ],
+        "description": "Set up AI implementation pipeline workflow"
+    },
+    
+    "AI PowerShell Command": {
+        "prefix": "aips",
+        "body": [
+            "# AI PowerShell Command",
+            "${1|claude,gemini,gpt,ai-compare|} \"${2:Your prompt here}\"$0"
+        ],
+        "description": "Quick AI PowerShell command"
+    },
+    
+    "AI Log Analysis": {
+        "prefix": "ailog",
+        "body": [
+            "# AI Log Analysis - ${CURRENT_DATE}",
+            "# File: ${TM_FILENAME}",
+            "# ",
+            "# Recent Activity:",
+            "ai-history ${1:7} # Last ${1:7} days",
+            "# ",
+            "# Specific Tool Logs:",
+            "ai-log ${2|claude,gemini,openai,all|} -Last ${3:10}",
+            "# ",
+            "# Open Logs Directory:",
+            "# logs$0"
+        ],
+        "description": "AI log analysis commands"
+    }
+}

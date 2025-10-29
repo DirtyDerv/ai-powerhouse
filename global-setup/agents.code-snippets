@@ -1,0 +1,105 @@
+{
+  "Security Review Marker": {
+    "prefix": "aisec",
+    "body": [
+      "// 🔒 SECURITY-AGENT: ${1:Review this code for vulnerabilities}",
+      "$0"
+    ],
+    "description": "Mark code for security agent review"
+  },
+  "Testing Agent Marker": {
+    "prefix": "aitest",
+    "body": [
+      "// 🧪 TESTING-AGENT: ${1:Generate tests for this function}",
+      "$0"
+    ],
+    "description": "Mark code for test generation"
+  },
+  "Documentation Agent Marker": {
+    "prefix": "aidoc",
+    "body": [
+      "// 📚 DOCS-AGENT: ${1:Document this function/class}",
+      "$0"
+    ],
+    "description": "Mark code for documentation"
+  },
+  "Performance Agent Marker": {
+    "prefix": "aiperf",
+    "body": [
+      "// ⚡ PERFORMANCE-AGENT: ${1:Optimize this code}",
+      "$0"
+    ],
+    "description": "Mark code for performance analysis"
+  },
+  "Code Review Agent Marker": {
+    "prefix": "aireview",
+    "body": [
+      "// 👁️ REVIEW-AGENT: ${1:Review code quality}",
+      "$0"
+    ],
+    "description": "Mark code for quality review"
+  },
+  "Debug Agent Marker": {
+    "prefix": "aidebug",
+    "body": [
+      "// 🐛 DEBUG-AGENT: ${1:Investigate this bug}",
+      "// Error: ${2:error message}",
+      "$0"
+    ],
+    "description": "Mark code for debugging"
+  },
+  "Refactoring Agent Marker": {
+    "prefix": "airefactor",
+    "body": [
+      "// 🔧 REFACTOR-AGENT: ${1:Suggest refactorings}",
+      "$0"
+    ],
+    "description": "Mark code for refactoring"
+  },
+  "Agent TODO": {
+    "prefix": "aitodo",
+    "body": [
+      "// AI-TODO: ${1:task description}",
+      "// Agent: ${2|Security,Testing,Docs,Performance,Review,Debug,Refactor|}",
+      "// Priority: ${3|High,Medium,Low|}",
+      "$0"
+    ],
+    "description": "Create AI agent task"
+  },
+  "Full Agent Pipeline": {
+    "prefix": "aipipe",
+    "body": [
+      "// 🚀 AGENT-PIPELINE: Run all agents on this code",
+      "// Agents: Security → Review → Performance → Testing → Docs",
+      "$0"
+    ],
+    "description": "Mark for full agent pipeline"
+  },
+  "Electronics Design Marker": {
+    "prefix": "aielec",
+    "body": [
+      "// 🔌 ELECTRONICS-AGENT: ${1:Design circuit or PCB}",
+      "// Task: ${2|design,debug,pcb,bom,review,test,pricing|}",
+      "$0"
+    ],
+    "description": "Mark for electronics design"
+  },
+  "Component Pricing Marker": {
+    "prefix": "aiprice",
+    "body": [
+      "// 💰 COMPONENT-PRICING: ${1:Component name or part number}",
+      "// Suppliers: RS, Farnell, Mouser, LCSC",
+      "$0"
+    ],
+    "description": "Mark for component pricing search"
+  },
+  "PCB Layout Marker": {
+    "prefix": "aipcb",
+    "body": [
+      "// 🔧 PCB-LAYOUT: ${1:PCB layout requirements}",
+      "// Layers: ${2|2-layer,4-layer,6-layer|}",
+      "$0"
+    ],
+    "description": "Mark for PCB layout design"
+  }
+}

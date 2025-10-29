@@ -1,0 +1,267 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🤖 AI: Ask Claude",
+      "type": "shell",
+      "command": "ai-claude",
+      "args": ["${input:aiPrompt}"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🧠 AI: Ask All Providers",
+      "type": "shell",
+      "command": "ai-quick",
+      "args": ["${input:aiPrompt}"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔍 AI: Comprehensive File Analysis",
+      "type": "shell",
+      "command": "ai-file",
+      "args": ["${file}"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🛡️ Security Agent: Review Current File",
+      "type": "shell",
+      "command": "security-review",
+      "args": ["-FilePath", "${file}", "-Prompt", "Comprehensive security analysis"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🧪 Testing Agent: Generate Tests",
+      "type": "shell",
+      "command": "generate-tests",
+      "args": ["-FilePath", "${file}", "-Prompt", "Generate comprehensive unit tests"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "📚 Documentation Agent: Generate Docs",
+      "type": "shell",
+      "command": "generate-docs",
+      "args": ["-FilePath", "${file}", "-Prompt", "Generate comprehensive documentation"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "⚡ Performance Agent: Analyze Performance",
+      "type": "shell",
+      "command": "analyze-performance",
+      "args": ["-FilePath", "${file}", "-Prompt", "Performance optimization analysis"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "👁️ Code Review Agent: Review Code",
+      "type": "shell",
+      "command": "code-review",
+      "args": ["-FilePath", "${file}", "-Prompt", "Detailed code review"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🐛 Debug Agent: Debug Issue",
+      "type": "shell",
+      "command": "debug-issue",
+      "args": ["-FilePath", "${file}", "-Prompt", "Debug analysis"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🏗️ Architecture Agent: Design Guidance",
+      "type": "shell",
+      "command": "design-architecture",
+      "args": ["-Prompt", "${input:architecturePrompt}"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "♻️ Refactoring Agent: Refactor Code",
+      "type": "shell",
+      "command": "refactor-code",
+      "args": ["-FilePath", "${file}", "-Prompt", "Refactoring suggestions"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔌 Electronics Agent: Circuit Design",
+      "type": "shell",
+      "command": "electronics-design",
+      "args": ["${input:electronicsPrompt}"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "💰 Electronics Agent: Component Pricing",
+      "type": "shell",
+      "command": "component-pricing",
+      "args": ["${input:componentName}"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔄 Agent Pipeline: Multi-Agent Analysis",
+      "type": "shell",
+      "command": "agent-pipeline",
+      "args": ["${input:agentList}", "-FilePath", "${file}", "-Prompt", "${input:pipelinePrompt}"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "⚖️ Compare AI Responses",
+      "type": "shell",
+      "command": "ai-compare",
+      "args": ["${input:aiPrompt}"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "📋 Show All AI Capabilities",
+      "type": "shell",
+      "command": "ai-help",
+      "args": [],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "aiPrompt",
+      "description": "Your question or prompt for AI",
+      "default": "",
+      "type": "promptString"
+    },
+    {
+      "id": "architecturePrompt",
+      "description": "Architecture or design question",
+      "default": "",
+      "type": "promptString"
+    },
+    {
+      "id": "electronicsPrompt",
+      "description": "Electronics design requirement",
+      "default": "",
+      "type": "promptString"
+    },
+    {
+      "id": "componentName",
+      "description": "Component name or part number for pricing",
+      "default": "",
+      "type": "promptString"
+    },
+    {
+      "id": "agentList",
+      "description": "Comma-separated list of agents (e.g., security-review,code-review)",
+      "default": "security-review,code-review",
+      "type": "promptString"
+    },
+    {
+      "id": "pipelinePrompt",
+      "description": "Prompt for the agent pipeline",
+      "default": "Comprehensive analysis",
+      "type": "promptString"
+    }
+  ]
+}

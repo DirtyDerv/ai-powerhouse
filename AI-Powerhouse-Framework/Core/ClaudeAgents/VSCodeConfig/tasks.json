@@ -1,0 +1,514 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Claude: Execute Prompt",
+            "type": "shell",
+            "command": "claude",
+            "args": [
+                "${input:promptInput}"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Run Claude Code with custom prompt input"
+        },
+        {
+            "label": "Claude: Fix Current File",
+            "type": "shell",
+            "command": "claude",
+            "args": [
+                "--file",
+                "${file}",
+                "Please analyze this code and fix any bugs, errors, or issues you find. Provide the corrected code with explanations."
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Fix bugs and issues in the currently active file"
+        },
+        {
+            "label": "Claude: Refactor Current File",
+            "type": "shell",
+            "command": "claude",
+            "args": [
+                "--file",
+                "${file}",
+                "Please refactor this code to improve readability, performance, and maintainability. Follow best practices for the language."
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Refactor the currently active file for better code quality"
+        },
+        {
+            "label": "Gemini: Analyze Current File", 
+            "type": "shell",
+            "command": "gemini",
+            "args": [
+                "--file",
+                "${file}",
+                "Please analyze this code for potential issues, security vulnerabilities, and improvement opportunities."
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Analyze the currently active file with Gemini"
+        },
+        {
+            "label": "Gemini: Custom Prompt",
+            "type": "shell",
+            "command": "gemini",
+            "args": [
+                "${input:promptInput}"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Run Gemini CLI with custom prompt input"
+        },
+        {
+            "label": "Gemini: Generate Documentation",
+            "type": "shell",
+            "command": "gemini", 
+            "args": [
+                "--file",
+                "${file}",
+                "Please generate comprehensive documentation for this code including function descriptions, parameters, return values, and usage examples."
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Generate documentation for the currently active file"
+        },
+        {
+            "label": "GitHub Copilot: Chat",
+            "type": "shell",
+            "command": "code",
+            "args": [
+                "--command",
+                "github.copilot.interactiveEditor.focus"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Open GitHub Copilot Chat interface"
+        },
+        {
+            "label": "GitHub Copilot: Explain Code",
+            "type": "shell",
+            "command": "code",
+            "args": [
+                "--command",
+                "github.copilot.explain"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Explain selected code with GitHub Copilot"
+        },
+        {
+            "label": "GitHub Copilot: Generate Tests",
+            "type": "shell",
+            "command": "code",
+            "args": [
+                "--command",
+                "github.copilot.generate.tests"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Generate tests for current file with GitHub Copilot"
+        },
+        {
+            "label": "AI Compare: All Models",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "& { $prompt = Read-Host 'Enter prompt for all AI models'; Write-Host '🔵 CLAUDE:' -ForegroundColor Blue; claude \"$prompt\"; Write-Host '🟢 GEMINI:' -ForegroundColor Green; gemini \"$prompt\" }"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Compare responses from Claude and Gemini"
+        },
+        {
+            "label": "AI Pipeline: Implement & Review",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile", 
+                "-Command",
+                "& { $prompt = Read-Host 'Enter implementation requirement'; Write-Host '📝 IMPLEMENTATION (Claude):' -ForegroundColor Blue; $impl = claude \"Implement: $prompt. Provide complete, production-ready code.\"; Write-Host '🔍 REVIEW (Gemini):' -ForegroundColor Green; gemini \"Review this implementation for bugs, security, and best practices: $impl\" }"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Claude implements, then Gemini reviews the implementation"
+        },
+        {
+            "label": "AI Pipeline: Full Analysis",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "& { if (-not '${file}') { Write-Error 'No active file'; exit 1 }; Write-Host '🔵 CLAUDE ANALYSIS:' -ForegroundColor Blue; claude --file '${file}' 'Analyze this code for bugs and best practices'; Write-Host '🟢 GEMINI ANALYSIS:' -ForegroundColor Green; gemini --file '${file}' 'Review for security and maintainability' }"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "All three AI models analyze the current file"
+        },
+        {
+            "label": "AI Tools: Status Check",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "& { Write-Host '🤖 AI Tools Status:' -ForegroundColor Magenta; @('claude','gemini') | ForEach-Object { if (Get-Command $_ -ErrorAction SilentlyContinue) { Write-Host \"✅ $_\" -ForegroundColor Green } else { Write-Host \"❌ $_\" -ForegroundColor Red } } }"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Check if all AI CLI tools are available"
+        },
+        {
+            "label": "AI Logs: Open Directory",
+            "type": "shell",
+            "command": "explorer.exe",
+            "args": [
+                "${env:USERPROFILE}\\.ai-logs"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Open AI logs directory in Windows Explorer"
+        },
+        {
+            "label": "AI Quick Pick Menu",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "& { $choice = @('Claude: Custom Prompt','Claude: Fix File','Gemini: Custom Prompt','Gemini: Analyze File','Compare All Models','Implementation Pipeline') | Out-GridView -Title 'Select AI Task' -OutputMode Single; if ($choice) { Write-Host \"Selected: $choice\" -ForegroundColor Green } else { Write-Host 'No selection made' -ForegroundColor Yellow } }"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Show interactive menu of AI tasks"
+        },
+        {
+            "label": "AI Auto Mode: Enable",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "Import-Module AIHelpers; Enable-AIAutoMode"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Enable automatic AI engagement when using GitHub Copilot"
+        },
+        {
+            "label": "AI Auto Mode: Status",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "Import-Module AIHelpers; Get-AIAutoStatus"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [],
+            "detail": "Check if AI Auto Mode is running"
+        },
+        {
+            "label": "Agent: Security Review",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-Command", "security-review '${file}'"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "focus": true
+            },
+            "problemMatcher": [],
+            "detail": "Run security analysis on current file"
+        },
+        {
+            "label": "Agent: Generate Tests",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-Command", "generate-tests '${file}'"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "detail": "Generate comprehensive tests for current file"
+        },
+        {
+            "label": "Agent: Generate Documentation",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-Command", "generate-docs '${file}'"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "detail": "Generate documentation for current file"
+        },
+        {
+            "label": "Agent: Performance Analysis",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-Command", "analyze-performance '${file}'"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "detail": "Analyze performance of current file"
+        },
+        {
+            "label": "Agent: Code Review",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-Command", "code-review '${file}'"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "detail": "Review code quality of current file"
+        },
+        {
+            "label": "Agent: Debug Issue",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-Command", "debug-issue '${file}'"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "detail": "Debug issues in current file"
+        },
+        {
+            "label": "Agent: Refactor Code",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-Command", "refactor-code '${file}'"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "detail": "Suggest refactorings for current file"
+        },
+        {
+            "label": "Agent: Full Pipeline",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-Command", "agent-pipeline '${file}'"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "focus": true
+            },
+            "detail": "Run all agents on current file"
+        },
+        {
+            "label": "Agent: Compare Responses",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-Command", "compare-agents '${input:agentComparePrompt}'"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "detail": "Compare responses from multiple agents"
+        },
+        {
+            "label": "Agent: Electronics Design",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-Command", "electronics-design '${input:electronicsPrompt}'"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "focus": true
+            },
+            "detail": "Design electronic circuits and PCBs"
+        },
+        {
+            "label": "Agent: Component Pricing",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-Command", "component-pricing '${input:componentName}'"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "detail": "Search component pricing from UK suppliers"
+        },
+        {
+            "label": "Agent: PCB Layout",
+            "type": "shell",
+            "command": "powershell",
+            "args": ["-Command", "Invoke-ElectronicsAgent -Task pcb -Prompt '${input:pcbPrompt}'"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "detail": "PCB layout design and optimization"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "promptInput",
+            "type": "promptString",
+            "description": "Enter your prompt:"
+        },
+        {
+            "id": "fileInput",
+            "type": "promptString", 
+            "description": "Enter file path (or leave empty for current file):",
+            "default": "${file}"
+        },
+        {
+            "id": "agentComparePrompt",
+            "type": "promptString",
+            "description": "Enter prompt to compare across agents"
+        },
+        {
+            "id": "electronicsPrompt",
+            "type": "promptString",
+            "description": "Enter electronics design requirements"
+        },
+        {
+            "id": "componentName",
+            "type": "promptString",
+            "description": "Enter component name or part number"
+        },
+        {
+            "id": "pcbPrompt",
+            "type": "promptString",
+            "description": "Enter PCB layout requirements"
+        }
+    ]
+}
