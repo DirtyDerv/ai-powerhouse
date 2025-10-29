@@ -92,25 +92,17 @@ if ($VSCodeGlobal) {
         if (Test-Path $vscodeSettingsPath) {
             Write-Host "   📋 Backing up existing VS Code settings..." -ForegroundColor Gray
             Copy-Item $vscodeSettingsPath "$vscodeSettingsPath.backup" -Force
+            
+            Write-Host "   📝 VS Code settings backed up. Manual merge recommended." -ForegroundColor Gray
+            Write-Host "   🔗 AI settings template: $sourceSettings" -ForegroundColor Gray
         }
         
-        # Merge with existing settings
-        $sourceSettingsContent = Get-Content $sourceSettings -Raw | ConvertFrom-Json
+        # For now, just copy the AI settings template without merging to avoid conflicts
+        $targetAISettings = Join-Path $vscodeUserDir "ai-powerhouse-settings.json"
+        Copy-Item $sourceSettings $targetAISettings -Force
         
-        if (Test-Path $vscodeSettingsPath) {
-            $existingSettings = Get-Content $vscodeSettingsPath -Raw | ConvertFrom-Json
-            
-            # Merge settings
-            foreach ($property in $sourceSettingsContent.PSObject.Properties) {
-                $existingSettings | Add-Member -Name $property.Name -Value $property.Value -Force
-            }
-            
-            $existingSettings | ConvertTo-Json -Depth 10 | Out-File $vscodeSettingsPath -Encoding UTF8
-        } else {
-            Copy-Item $sourceSettings $vscodeSettingsPath -Force
-        }
-        
-        Write-Host "✅ VS Code settings configured with AI Powerhouse defaults" -ForegroundColor Green
+        Write-Host "✅ AI Powerhouse settings template created: ai-powerhouse-settings.json" -ForegroundColor Green
+        Write-Host "   📝 You can manually merge these into your settings.json" -ForegroundColor Gray
     }
     
     # Copy keybindings
